@@ -8,8 +8,6 @@ import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.model.Transaction
 import org.junit.Before
 
-
-
 class OperationTest {
 
     private lateinit var money: DoubleArray

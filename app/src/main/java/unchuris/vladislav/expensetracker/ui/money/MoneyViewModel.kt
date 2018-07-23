@@ -10,7 +10,7 @@ class MoneyViewModel: BaseViewModel() {
 
     fun bind(post: Money){
         type.value = post.currency.shortName
-        amount.value = post.value.toString()
+        amount.value = String.format("%.2f", post.value)
     }
 
     fun getType(): MutableLiveData<String> {
