@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -17,11 +16,13 @@ import android.widget.Toast
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 import unchuris.vladislav.expensetracker.databinding.ActivityMainBinding
 import unchuris.vladislav.expensetracker.ui.money.MoneyListModel
-import com.ncapdevi.fragnav.FragNavController
+import unchuris.vladislav.expensetracker.ui.settings.SettingsFragment
+import android.view.View
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity()
+class MainActivity : DaggerAppCompatActivity()
         , NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity()
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: PostListViewModel
     private lateinit var moneyModel: MoneyListModel
+
+    @Inject lateinit var settingsFragment: SettingsFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?){
@@ -46,18 +49,30 @@ class MainActivity : AppCompatActivity()
         moneyModel = ViewModelProviders.of(this).get(MoneyListModel::class.java)
         binding.moneyModel = moneyModel
 
+        drawer = findViewById(R.id.drawer_layout)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
 
-        drawer = findViewById(R.id.drawer_layout)
+        nav_view.setNavigationItemSelectedListener(this)
 
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+    }
 
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_wallet -> Toast.makeText(this, "log_out", Toast.LENGTH_SHORT).show()
+            R.id.nav_settings -> supportFragmentManager.beginTransaction().replace(R.id.container_main, settingsFragment).addToBackStack(null).commit()
+            R.id.nav_log_out -> Toast.makeText(this, "log_out", Toast.LENGTH_SHORT).show()
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+    fun toastMe(view: View) {
+        showFragment()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -77,15 +92,6 @@ class MainActivity : AppCompatActivity()
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_wallet -> Toast.makeText(this, "wallet", Toast.LENGTH_SHORT).show()
-            R.id.nav_settings -> Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show()
-            R.id.nav_log_out -> Toast.makeText(this, "log_out", Toast.LENGTH_SHORT).show()
-        }
-        drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
 
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -93,5 +99,9 @@ class MainActivity : AppCompatActivity()
         } else {
             super.onBackPressed()
         }
+    }
+
+    private fun showFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.container_main, settingsFragment).addToBackStack(null).commit()
     }
 }

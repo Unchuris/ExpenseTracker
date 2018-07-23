@@ -2,26 +2,34 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
 
-        <variable
-            name="viewModel"
-            type="unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel" />
+        <data>
+                <variable
+                    name="viewModel"
+                    type="unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel" />
 
-        <variable
-            name="moneyModel"
-            type="unchuris.vladislav.expensetracker.ui.money.MoneyListModel" />
-    </data>
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:openDrawer="start">
+                <variable
+                    name="moneyModel"
+                    type="unchuris.vladislav.expensetracker.ui.money.MoneyListModel" />
+        </data>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            tools:openDrawer="start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <include
-            layout="@layout/app_bar"
+            layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+
+        <FrameLayout
+            android:id="@+id/container_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
@@ -31,49 +39,55 @@
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main_drawer" />
 
-
         <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="?attr/actionBarSize">
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/money_list"
-                android:layout_width="match_parent"
-                android:layout_height="65sp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                app:adapter="@{moneyModel.getPostMoneyAdapter()}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/money_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="65sp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    app:adapter="@{moneyModel.getPostMoneyAdapter()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.734"
+                    app:mutableVisibility="@{viewModel.getLoadingVisibility()}" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/post_list"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    app:adapter="@{viewModel.getPostListAdapter()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/money_list"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.734"
-                app:mutableVisibility="@{viewModel.getLoadingVisibility()}" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/post_list"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                app:adapter="@{viewModel.getPostListAdapter()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/money_list"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v4.widget.DrawerLayout>
+                android:text="Button"
+                android:onClick="toastMe"
+                tools:layout_editor_absoluteX="269dp"
+                tools:layout_editor_absoluteY="179dp" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.DrawerLayout>
 </layout>

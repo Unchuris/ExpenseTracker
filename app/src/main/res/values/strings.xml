@@ -6,4 +6,8 @@
     <string name="log_out">Выйти</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="major_currency">Основная валюта</string>
+    <string name="rub">RUB</string>
+    <string name="about_application">О приложении</string>
+    <string name="other_settings">Другие настройки</string>
 </resources>
