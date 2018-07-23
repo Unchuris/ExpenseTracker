@@ -9,8 +9,8 @@ class PostViewModel: BaseViewModel() {
     private val postBody = MutableLiveData<String>()
 
     fun bind(post: Transaction){
-        postTitle.value = post.title
-        postBody.value = post.body
+        postTitle.value = post.type.name
+        postBody.value = post.money.toString()
     }
 
     fun getPostTitle():MutableLiveData<String>{
