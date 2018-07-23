@@ -9,11 +9,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import unchuris.vladislav.expensetracker.network.TransactionApi
 
-/**
- * Module which provides all required dependencies about network
- */
-@Module
 
+@Module
 @Suppress("unused")
 object NetworkModule {
 

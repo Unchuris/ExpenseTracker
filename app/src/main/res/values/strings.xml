@@ -4,10 +4,12 @@
     <string name="settings">Настройки</string>
     <string name="balance">Баланс</string>
     <string name="log_out">Выйти</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Открыть панель</string>
+    <string name="navigation_drawer_close">Закрыт панель</string>
     <string name="major_currency">Основная валюта</string>
     <string name="rub">RUB</string>
     <string name="about_application">О приложении</string>
     <string name="other_settings">Другие настройки</string>
+    <string name="infoTitle">О приложении</string>
+    <string name="fullInfo">Это приложение для учета финансов</string>
 </resources>

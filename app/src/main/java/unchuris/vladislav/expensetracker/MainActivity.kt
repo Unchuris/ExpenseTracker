@@ -20,6 +20,7 @@ import unchuris.vladislav.expensetracker.ui.settings.SettingsFragment
 import android.view.View
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import unchuris.vladislav.expensetracker.ui.about.AboutFragment
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity()
@@ -33,6 +34,7 @@ class MainActivity : DaggerAppCompatActivity()
     private lateinit var moneyModel: MoneyListModel
 
     @Inject lateinit var settingsFragment: SettingsFragment
+    @Inject lateinit var aboutFragment: AboutFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?){
@@ -49,10 +51,10 @@ class MainActivity : DaggerAppCompatActivity()
         moneyModel = ViewModelProviders.of(this).get(MoneyListModel::class.java)
         binding.moneyModel = moneyModel
 
-        drawer = findViewById(R.id.drawer_layout)
-
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
+
+        drawer = findViewById(R.id.drawer_layout)
 
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -71,8 +73,13 @@ class MainActivity : DaggerAppCompatActivity()
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
-    fun toastMe(view: View) {
-        showFragment()
+
+    fun openSetting(view: View) {
+        supportFragmentManager.beginTransaction().replace(R.id.container_main, settingsFragment).addToBackStack(null).commit()
+    }
+
+    fun openAbout(view: View) {
+        supportFragmentManager.beginTransaction().replace(R.id.container_main, aboutFragment).addToBackStack(null).commit()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -101,7 +108,4 @@ class MainActivity : DaggerAppCompatActivity()
         }
     }
 
-    private fun showFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.container_main, settingsFragment).addToBackStack(null).commit()
-    }
 }

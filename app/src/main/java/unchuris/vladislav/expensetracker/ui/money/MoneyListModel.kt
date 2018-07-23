@@ -1,7 +1,6 @@
 package unchuris.vladislav.expensetracker.ui.money
 
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -45,7 +44,6 @@ class MoneyListModel: BaseViewModel() {
 
     private fun onRetrievePostListError(e: Throwable) {
         e.printStackTrace()
-        Log.d("ERR", e.message)
     }
 
     override fun onCleared() {
