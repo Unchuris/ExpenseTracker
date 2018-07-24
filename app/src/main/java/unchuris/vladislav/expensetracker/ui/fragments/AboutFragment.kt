@@ -1,4 +1,4 @@
-package unchuris.vladislav.expensetracker.ui.about
+package unchuris.vladislav.expensetracker.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

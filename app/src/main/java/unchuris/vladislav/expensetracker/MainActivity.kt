@@ -1,55 +1,32 @@
 package unchuris.vladislav.expensetracker
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.res.Configuration
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.Toast
-import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
-import unchuris.vladislav.expensetracker.databinding.ActivityMainBinding
-import unchuris.vladislav.expensetracker.ui.money.MoneyListModel
-import unchuris.vladislav.expensetracker.ui.settings.SettingsFragment
-import android.view.View
+import unchuris.vladislav.expensetracker.ui.fragments.SettingsFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import unchuris.vladislav.expensetracker.ui.about.AboutFragment
+import unchuris.vladislav.expensetracker.ui.fragments.AboutFragment
+import unchuris.vladislav.expensetracker.ui.fragments.BalanceFragment
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity()
-        , NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
-
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: PostListViewModel
-    private lateinit var moneyModel: MoneyListModel
-
     @Inject lateinit var settingsFragment: SettingsFragment
     @Inject lateinit var aboutFragment: AboutFragment
-
+    @Inject lateinit var balanceFragment: BalanceFragment
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        binding.postList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.moneyList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        viewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
-        binding.viewModel = viewModel
-
-        moneyModel = ViewModelProviders.of(this).get(MoneyListModel::class.java)
-        binding.moneyModel = moneyModel
+        setContentView(R.layout.activity_main)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
@@ -62,24 +39,18 @@ class MainActivity : DaggerAppCompatActivity()
         drawer.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+
+        supportFragmentManager.beginTransaction().replace(R.id.container_main, balanceFragment).addToBackStack(null).commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_wallet -> Toast.makeText(this, "log_out", Toast.LENGTH_SHORT).show()
+            R.id.nav_wallet -> supportFragmentManager.beginTransaction().replace(R.id.container_main, balanceFragment).addToBackStack(null).commit()
             R.id.nav_settings -> supportFragmentManager.beginTransaction().replace(R.id.container_main, settingsFragment).addToBackStack(null).commit()
-            R.id.nav_log_out -> Toast.makeText(this, "log_out", Toast.LENGTH_SHORT).show()
+            R.id.nav_log_out -> supportFragmentManager.beginTransaction().replace(R.id.container_main, aboutFragment).addToBackStack(null).commit()
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    fun openSetting(view: View) {
-        supportFragmentManager.beginTransaction().replace(R.id.container_main, settingsFragment).addToBackStack(null).commit()
-    }
-
-    fun openAbout(view: View) {
-        supportFragmentManager.beginTransaction().replace(R.id.container_main, aboutFragment).addToBackStack(null).commit()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -99,7 +70,6 @@ class MainActivity : DaggerAppCompatActivity()
         return super.onOptionsItemSelected(item)
     }
 
-
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
@@ -107,5 +77,4 @@ class MainActivity : DaggerAppCompatActivity()
             super.onBackPressed()
         }
     }
-
 }
