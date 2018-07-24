@@ -9,7 +9,7 @@ import unchuris.vladislav.expensetracker.databinding.ItemPostBinding
 import unchuris.vladislav.expensetracker.model.Transaction
 
 class PostListAdapter: RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
-    private lateinit var postList: List<Transaction>
+    private var list: List<Transaction> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemPostBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_post, parent, false)
@@ -17,15 +17,15 @@ class PostListAdapter: RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(postList[position])
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
-        return if (::postList.isInitialized) postList.size else 0
+        return list.size
     }
 
     fun updatePostList(postList: List<Transaction>) {
-        this.postList = postList
+        this.list = postList
         notifyDataSetChanged()
     }
 

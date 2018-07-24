@@ -9,7 +9,7 @@ import unchuris.vladislav.expensetracker.databinding.BalanceBinding
 import unchuris.vladislav.expensetracker.model.Money
 
 class MoneyListAdapter: RecyclerView.Adapter<MoneyListAdapter.ViewHolder>() {
-    private lateinit var postList: List<Money>
+    private var list: List<Money> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: BalanceBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.balance, parent, false)
@@ -17,15 +17,15 @@ class MoneyListAdapter: RecyclerView.Adapter<MoneyListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(postList[position])
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
-        return if (::postList.isInitialized) postList.size else 0
+        return list.size
     }
 
-    fun updatePostList(postList: List<Money>) {
-        this.postList = postList
+    fun updateList(postList: List<Money>) {
+        this.list = postList
         notifyDataSetChanged()
     }
 

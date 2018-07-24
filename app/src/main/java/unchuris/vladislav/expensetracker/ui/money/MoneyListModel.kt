@@ -32,7 +32,7 @@ class MoneyListModel: BaseViewModel() {
     }
 
     private fun onRetrievePostListSuccess(postList: List<Money>) {
-        postMoneyAdapter.updatePostList(postList)
+        postMoneyAdapter.updateList(postList)
     }
 
     private fun onRetrievePostListError(e: Throwable) {
