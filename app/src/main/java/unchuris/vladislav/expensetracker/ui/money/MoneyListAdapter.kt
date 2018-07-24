@@ -5,14 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import unchuris.vladislav.expensetracker.R
-import unchuris.vladislav.expensetracker.databinding.CustomSpinnerBinding
+import unchuris.vladislav.expensetracker.databinding.BalanceBinding
 import unchuris.vladislav.expensetracker.model.Money
 
 class MoneyListAdapter: RecyclerView.Adapter<MoneyListAdapter.ViewHolder>() {
     private lateinit var postList: List<Money>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: CustomSpinnerBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.custom_spinner, parent, false)
+        val binding: BalanceBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.balance, parent, false)
         return ViewHolder(binding)
     }
 
@@ -29,7 +29,7 @@ class MoneyListAdapter: RecyclerView.Adapter<MoneyListAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: CustomSpinnerBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: BalanceBinding) : RecyclerView.ViewHolder(binding.root) {
         private val moneyModel = MoneyViewModel()
 
         fun bind(post: Money) {

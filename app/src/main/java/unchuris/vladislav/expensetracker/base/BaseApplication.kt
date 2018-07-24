@@ -5,10 +5,22 @@ import dagger.android.support.DaggerApplication
 import unchuris.vladislav.expensetracker.injection.DaggerAppComponent
 
 class BaseApplication : DaggerApplication() {
+
+    companion object {
+        private lateinit var baseApplication: BaseApplication
+
+        fun string(resId: Int): String = baseApplication.resources.getString(resId)
+    }
+
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent
                 .builder()
                 .create(this)
                 .build()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        baseApplication = getApplicationContext() as BaseApplication
     }
 }

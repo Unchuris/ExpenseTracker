@@ -36,15 +36,11 @@ class BalanceFragment @Inject constructor(): DaggerFragment() {
 
         binding.postList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.moneyList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-
         viewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
         binding.viewModel = viewModel
-
         moneyModel = ViewModelProviders.of(this).get(MoneyListModel::class.java)
         binding.moneyModel = moneyModel
 
         binding.setLifecycleOwner(this)
     }
-
 }

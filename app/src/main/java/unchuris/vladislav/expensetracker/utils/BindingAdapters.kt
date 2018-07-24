@@ -10,7 +10,7 @@ import android.widget.TextView
 import unchuris.vladislav.expensetracker.utils.extension.getParentActivity
 
 @BindingAdapter("adapter")
-fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>){
     view.adapter = adapter
 }
 

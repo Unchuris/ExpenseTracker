@@ -1,5 +1,5 @@
 package unchuris.vladislav.expensetracker.utils
 
-interface CurrencyConverter {
+interface ICurrencyConverter {
     fun convert(currencyFrom: String, currencyTo: String): Double
 }

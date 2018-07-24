@@ -1,6 +1,8 @@
 package unchuris.vladislav.expensetracker.model
 
-enum class Currency constructor(val title: String, val symbol: String, val shortName: String) {
-    RUBLE("рубль", "₽", "RUB"),
-    DOLLAR("доллар", "$", "USD")
+import unchuris.vladislav.expensetracker.R
+
+enum class Currency constructor(val title: Int, val symbol: String, val shortName: Int) {
+    RUBLE(R.string.rub, "₽", R.string.rubShort),
+    DOLLAR(R.string.usd, "$", R.string.usdShort)
 }

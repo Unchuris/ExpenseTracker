@@ -21,10 +21,6 @@ class PostListViewModel: BaseViewModel(){
     val postListAdapter: PostListAdapter = PostListAdapter()
 
     init{
-        loadPosts()
-    }
-
-    private fun loadPosts(){
         subscription = postApi.getTransactions()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -7,7 +7,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="major_currency">Major currency</string>
-    <string name="rub">RUB</string>
+    <string name="rub">ruble</string>
+    <string name="usd">dollar</string>
+    <string name="rubShort">RUB</string>
+    <string name="usdShort">USD</string>
     <string name="about_application">About application</string>
     <string name="other_settings">Other_settings</string>
     <string name="infoTitle">About application</string>

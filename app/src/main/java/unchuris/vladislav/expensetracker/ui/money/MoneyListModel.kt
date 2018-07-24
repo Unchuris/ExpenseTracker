@@ -15,19 +15,13 @@ class MoneyListModel: BaseViewModel() {
     @Inject
     lateinit var postApi: TransactionApi
 
-
     private lateinit var subscription: Disposable
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
-
     var postMoneyAdapter = MoneyListAdapter()
 
     init {
-        loadPosts()
-    }
-
-    private fun loadPosts() {
         val mockMoney: IMoneyRepository = MoneyRepository()
         subscription = mockMoney.getBalance()
                 .subscribeOn(Schedulers.io())
@@ -35,7 +29,6 @@ class MoneyListModel: BaseViewModel() {
                 .subscribe(
                         { result -> onRetrievePostListSuccess(result) }
                 ) { e -> onRetrievePostListError(e) }
-
     }
 
     private fun onRetrievePostListSuccess(postList: List<Money>) {
@@ -43,7 +36,7 @@ class MoneyListModel: BaseViewModel() {
     }
 
     private fun onRetrievePostListError(e: Throwable) {
-        e.printStackTrace()
+
     }
 
     override fun onCleared() {

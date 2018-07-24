@@ -1,6 +1,7 @@
 package unchuris.vladislav.expensetracker.ui.money
 
 import android.arch.lifecycle.MutableLiveData
+import unchuris.vladislav.expensetracker.base.BaseApplication.Companion.string
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Money
 
@@ -9,7 +10,7 @@ class MoneyViewModel: BaseViewModel() {
     private val amount = MutableLiveData<String>()
 
     fun bind(post: Money){
-        type.value = post.currency.shortName
+        type.value = string(post.currency.shortName)
         amount.value = String.format("%.2f", post.value)
     }
 
