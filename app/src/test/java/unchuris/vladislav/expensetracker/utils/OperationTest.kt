@@ -48,5 +48,4 @@ class OperationTest {
 
         Assert.assertEquals(res, sum, 0.01)
     }
-
 }

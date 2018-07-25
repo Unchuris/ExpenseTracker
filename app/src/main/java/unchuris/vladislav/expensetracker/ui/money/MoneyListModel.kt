@@ -10,7 +10,7 @@ import unchuris.vladislav.expensetracker.network.ITransactionApi
 import unchuris.vladislav.expensetracker.repository.MoneyRepository
 import javax.inject.Inject
 
-class MoneyListModel : BaseViewModel() {
+class MoneyListModel : BaseViewModel(){
     @Inject
     lateinit var postApi: ITransactionApi
 
