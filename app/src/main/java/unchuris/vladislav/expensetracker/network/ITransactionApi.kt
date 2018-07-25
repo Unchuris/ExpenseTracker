@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import unchuris.vladislav.expensetracker.model.Money
 import unchuris.vladislav.expensetracker.model.Transaction
 
-interface TransactionApi {
+interface ITransactionApi {
 
     @GET("/posts")
     fun getTransactions(): Observable<List<Transaction>>

@@ -8,7 +8,7 @@ import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.BalanceBinding
 import unchuris.vladislav.expensetracker.model.Money
 
-class MoneyListAdapter: RecyclerView.Adapter<MoneyListAdapter.ViewHolder>() {
+class MoneyListAdapter : RecyclerView.Adapter<MoneyListAdapter.ViewHolder>() {
     private var list: List<Money> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -16,11 +16,11 @@ import unchuris.vladislav.expensetracker.injection.module.ViewModule
             ViewModule::class
         ]
 )
-interface AppComponent: AndroidInjector<BaseApplication> {
+interface IAppComponent : AndroidInjector<BaseApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun create(app: Application):Builder
-        fun build(): AppComponent
+        fun create(app: Application): Builder
+        fun build(): IAppComponent
     }
 }

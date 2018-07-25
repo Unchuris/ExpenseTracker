@@ -5,11 +5,11 @@ import unchuris.vladislav.expensetracker.base.BaseApplication.Companion.string
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Money
 
-class MoneyViewModel: BaseViewModel() {
+class MoneyViewModel : BaseViewModel() {
     private val type = MutableLiveData<String>()
     private val amount = MutableLiveData<String>()
 
-    fun bind(post: Money){
+    fun bind(post: Money) {
         type.value = string(post.currency.shortName)
         amount.value = String.format("%.2f", post.value)
     }

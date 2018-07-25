@@ -7,12 +7,12 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Transaction
-import unchuris.vladislav.expensetracker.network.TransactionApi
+import unchuris.vladislav.expensetracker.network.ITransactionApi
 import javax.inject.Inject
 
-class PostListViewModel: BaseViewModel(){
+class PostListViewModel : BaseViewModel() {
     @Inject
-    lateinit var postApi: TransactionApi
+    lateinit var postApi: ITransactionApi
 
     private lateinit var subscription: Disposable
 
@@ -20,7 +20,7 @@ class PostListViewModel: BaseViewModel(){
 
     val postListAdapter: PostListAdapter = PostListAdapter()
 
-    init{
+    init {
         subscription = postApi.getTransactions()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -32,20 +32,19 @@ class PostListViewModel: BaseViewModel(){
                 )
     }
 
-    private fun onRetrievePostListStart(){
+    private fun onRetrievePostListStart() {
         loadingVisibility.value = View.VISIBLE
     }
 
-    private fun onRetrievePostListFinish(){
+    private fun onRetrievePostListFinish() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePostListSuccess(postList:List<Transaction>){
+    private fun onRetrievePostListSuccess(postList: List<Transaction>) {
         postListAdapter.updatePostList(postList)
     }
 
-    private fun onRetrievePostListError(){
-
+    private fun onRetrievePostListError() {
     }
 
     override fun onCleared() {

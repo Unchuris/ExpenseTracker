@@ -11,14 +11,14 @@ import unchuris.vladislav.expensetracker.ui.fragments.SettingsFragment
 abstract class ViewModule {
 
     @ContributesAndroidInjector
-    abstract fun settingsFragment() : SettingsFragment
+    abstract fun settingsFragment(): SettingsFragment
 
     @ContributesAndroidInjector
-    abstract fun mainActivity() : MainActivity
+    abstract fun mainActivity(): MainActivity
 
     @ContributesAndroidInjector
-    abstract fun aboutFragment() : AboutFragment
+    abstract fun aboutFragment(): AboutFragment
 
     @ContributesAndroidInjector
-    abstract fun balanceFragment() : BalanceFragment
+    abstract fun balanceFragment(): BalanceFragment
 }

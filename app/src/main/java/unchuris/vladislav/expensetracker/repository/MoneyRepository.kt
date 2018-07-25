@@ -1,12 +1,12 @@
 package unchuris.vladislav.expensetracker.repository
-import io.reactivex.Observable;
+import io.reactivex.Observable
 import unchuris.vladislav.expensetracker.model.Currency
 import unchuris.vladislav.expensetracker.model.Money
 import unchuris.vladislav.expensetracker.utils.EXCHANGE_RATE
 
-class MoneyRepository : IMoneyRepository {
+class MoneyRepository {
 
-    override fun getBalance(): Observable<List<Money>> {
+    fun getBalance(): Observable<List<Money>> {
         val currentBalance = 1000.00
 
         val balancesHardcode = ArrayList<Money>()
@@ -17,5 +17,4 @@ class MoneyRepository : IMoneyRepository {
         balancesHardcode.add(usd)
         return Observable.just(balancesHardcode)
     }
-
 }

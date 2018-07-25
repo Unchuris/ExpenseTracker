@@ -2,7 +2,7 @@ package unchuris.vladislav.expensetracker.base
 
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
-import unchuris.vladislav.expensetracker.injection.DaggerAppComponent
+import unchuris.vladislav.expensetracker.injection.DaggerIAppComponent
 
 class BaseApplication : DaggerApplication() {
 
@@ -13,7 +13,7 @@ class BaseApplication : DaggerApplication() {
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent
+        return DaggerIAppComponent
                 .builder()
                 .create(this)
                 .build()

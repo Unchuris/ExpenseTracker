@@ -8,7 +8,7 @@ import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.ItemPostBinding
 import unchuris.vladislav.expensetracker.model.Transaction
 
-class PostListAdapter: RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
+class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
     private var list: List<Transaction> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

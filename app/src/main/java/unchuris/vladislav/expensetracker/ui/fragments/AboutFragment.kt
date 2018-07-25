@@ -8,9 +8,8 @@ import dagger.android.support.DaggerFragment
 import unchuris.vladislav.expensetracker.R
 import javax.inject.Inject
 
-class AboutFragment @Inject constructor(): DaggerFragment() {
+class AboutFragment @Inject constructor() : DaggerFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
-            = inflater.inflate(R.layout.fragmet_about, container, false)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+            inflater.inflate(R.layout.fragmet_about, container, false)
 }

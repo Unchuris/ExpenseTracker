@@ -6,14 +6,13 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Money
-import unchuris.vladislav.expensetracker.network.TransactionApi
-import unchuris.vladislav.expensetracker.repository.IMoneyRepository
+import unchuris.vladislav.expensetracker.network.ITransactionApi
 import unchuris.vladislav.expensetracker.repository.MoneyRepository
 import javax.inject.Inject
 
-class MoneyListModel: BaseViewModel() {
+class MoneyListModel : BaseViewModel() {
     @Inject
-    lateinit var postApi: TransactionApi
+    lateinit var postApi: ITransactionApi
 
     private lateinit var subscription: Disposable
 
@@ -22,7 +21,7 @@ class MoneyListModel: BaseViewModel() {
     var postMoneyAdapter = MoneyListAdapter()
 
     init {
-        val mockMoney: IMoneyRepository = MoneyRepository()
+        val mockMoney: MoneyRepository = MoneyRepository()
         subscription = mockMoney.getBalance()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -36,7 +35,6 @@ class MoneyListModel: BaseViewModel() {
     }
 
     private fun onRetrievePostListError(e: Throwable) {
-
     }
 
     override fun onCleared() {

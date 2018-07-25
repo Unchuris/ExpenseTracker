@@ -3,7 +3,6 @@ package unchuris.vladislav.expensetracker.ui.fragments
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 import javax.inject.Inject
 
-class BalanceFragment @Inject constructor(): DaggerFragment() {
+class BalanceFragment @Inject constructor() : DaggerFragment() {
 
     private var binding: FragmentBalanceBinding by autoCleared<FragmentBalanceBinding>()
     private lateinit var viewModel: PostListViewModel

@@ -4,20 +4,20 @@ import android.arch.lifecycle.MutableLiveData
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Transaction
 
-class PostViewModel: BaseViewModel() {
+class PostViewModel : BaseViewModel() {
     private val postTitle = MutableLiveData<String>()
     private val postBody = MutableLiveData<String>()
 
-    fun bind(post: Transaction){
+    fun bind(post: Transaction) {
         postTitle.value = post.type.name
         postBody.value = post.money.toString()
     }
 
-    fun getPostTitle():MutableLiveData<String>{
+    fun getPostTitle(): MutableLiveData<String> {
         return postTitle
     }
 
-    fun getPostBody():MutableLiveData<String>{
+    fun getPostBody(): MutableLiveData<String> {
         return postBody
     }
 }
