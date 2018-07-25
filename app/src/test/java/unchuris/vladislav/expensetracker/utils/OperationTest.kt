@@ -34,7 +34,7 @@ class OperationTest {
                 money[3].toRubble(Currency.DOLLAR) +
                 money[4].toRubble(Currency.DOLLAR)
 
-        Assert.assertEquals(res, sum, 0.001)
+        Assert.assertEquals(res, sum, 0.01)
     }
 
     @Test
@@ -46,7 +46,7 @@ class OperationTest {
                 money[3].toDollar(Currency.DOLLAR) +
                 money[4].toDollar(Currency.DOLLAR)
 
-        Assert.assertEquals(res, sum, 0.001)
+        Assert.assertEquals(res, sum, 0.01)
     }
 
 }

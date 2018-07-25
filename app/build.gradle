@@ -7,6 +7,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key'
+            keyPassword '123456'
+            storeFile file('D:/1/new_jks_key.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 27
     dataBinding {
         enabled = true

@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class BalanceFragment @Inject constructor() : DaggerFragment() {
 
-    private var binding: FragmentBalanceBinding by autoCleared<FragmentBalanceBinding>()
+    private var binding: FragmentBalanceBinding by autoCleared()
     private lateinit var viewModel: PostListViewModel
     private lateinit var moneyModel: MoneyListModel
 
@@ -33,8 +33,8 @@ class BalanceFragment @Inject constructor() : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.postList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.moneyList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.postList.layoutManager = LinearLayoutManager(context)
+        binding.moneyList.layoutManager = LinearLayoutManager(context)
         viewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
         binding.viewModel = viewModel
         moneyModel = ViewModelProviders.of(this).get(MoneyListModel::class.java)
