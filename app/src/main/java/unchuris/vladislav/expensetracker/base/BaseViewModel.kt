@@ -6,6 +6,7 @@ import unchuris.vladislav.expensetracker.injection.component.IViewModelInjector
 import unchuris.vladislav.expensetracker.injection.module.NetworkModule
 import unchuris.vladislav.expensetracker.ui.money.MoneyListModel
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
+import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 
 abstract class BaseViewModel : ViewModel() {
     private val injector: IViewModelInjector = DaggerIViewModelInjector
@@ -21,6 +22,7 @@ abstract class BaseViewModel : ViewModel() {
         when (this) {
             is PostListViewModel -> injector.inject(this)
             is MoneyListModel -> injector.inject(this)
+            is WalletListModel -> injector.inject(this)
         }
     }
 }

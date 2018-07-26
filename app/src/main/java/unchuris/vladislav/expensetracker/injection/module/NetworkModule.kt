@@ -32,4 +32,4 @@ object NetworkModule {
     }
 }
 
-val BASE_URL: String = "Http://test.com"
+val BASE_URL: String = "Http://fragment_wallet.com"

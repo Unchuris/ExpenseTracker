@@ -15,4 +15,14 @@
     <string name="other_settings">Другие настройки</string>
     <string name="infoTitle">О приложении</string>
     <string name="fullInfo">Это приложение для учета финансов</string>
+
+
+    <string name="title_1">Cool card</string>
+    <string name="title_2">Ok card</string>
+    <string name="title_3">Bad card</string>
+    <string name="title_4">Ugly card</string>
+
+    <string name="text_1">TEXT</string>
+
+
 </resources>
