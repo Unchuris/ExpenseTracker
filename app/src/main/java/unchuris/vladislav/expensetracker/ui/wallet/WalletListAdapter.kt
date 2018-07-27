@@ -6,17 +6,16 @@ import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.AdapterBinding
-import unchuris.vladislav.expensetracker.utils.cardBalance.CardItem
+import unchuris.vladislav.expensetracker.model.Wallet
 import unchuris.vladislav.expensetracker.utils.cardBalance.ICardAdapter
 import java.util.ArrayList
 
 class WalletListAdapter : PagerAdapter(), ICardAdapter {
 
     private val mViews: MutableList<CardView?>
-    private val mData: MutableList<CardItem>
+    private val mData: MutableList<Wallet>
     private var mBaseElevation: Float = 0.toFloat()
 
     init {
@@ -24,7 +23,7 @@ class WalletListAdapter : PagerAdapter(), ICardAdapter {
         mViews = ArrayList()
     }
 
-    fun addCardItem(item: CardItem) {
+    fun addCardItem(item: Wallet) {
         mViews.add(null)
         mData.add(item)
         notifyDataSetChanged()
@@ -50,7 +49,8 @@ class WalletListAdapter : PagerAdapter(), ICardAdapter {
         val view: AdapterBinding = DataBindingUtil.inflate(LayoutInflater.from(container.context), R.layout.adapter, container, false)
 
         container.addView(view.root)
-        bind(mData[position], view.root)
+
+        bind(mData[position], view)
         val cardView = view.root.findViewById<View>(R.id.cardView) as CardView
 
         if (mBaseElevation == 0f) {
@@ -67,11 +67,9 @@ class WalletListAdapter : PagerAdapter(), ICardAdapter {
         mViews[position] = null
     }
 
-    private fun bind(item: CardItem, view: View) {
-        val titleTextView = view.findViewById<View>(R.id.titleTextView) as TextView
-        val contentTextView = view.findViewById<View>(R.id.contentTextView) as TextView
-        titleTextView.setText(item.title)
-        contentTextView.setText(item.text)
+    private fun bind(item: Wallet, binding: AdapterBinding) {
+        val viewModel = WalletViewModel()
+        viewModel.bind(item)
+        binding.viewModel = viewModel
     }
-
 }

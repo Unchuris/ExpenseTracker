@@ -45,5 +45,4 @@ class CardFragmentPagerAdapter(fm: FragmentManager, private val mBaseElevation: 
     fun addCardFragment(fragment: CardFragment) {
         mFragments.add(fragment)
     }
-
 }

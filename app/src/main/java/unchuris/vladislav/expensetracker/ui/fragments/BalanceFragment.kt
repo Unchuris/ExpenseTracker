@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.FragmentBalanceBinding
-import unchuris.vladislav.expensetracker.ui.money.MoneyListModel
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 import javax.inject.Inject
@@ -19,7 +18,6 @@ class BalanceFragment @Inject constructor() : DaggerFragment() {
 
     private var binding: FragmentBalanceBinding by autoCleared()
     private lateinit var viewModel: PostListViewModel
-    private lateinit var moneyModel: MoneyListModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(
@@ -34,11 +32,8 @@ class BalanceFragment @Inject constructor() : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         binding.postList.layoutManager = LinearLayoutManager(context)
-        binding.moneyList.layoutManager = LinearLayoutManager(context)
         viewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
         binding.viewModel = viewModel
-        moneyModel = ViewModelProviders.of(this).get(MoneyListModel::class.java)
-        binding.moneyModel = moneyModel
 
         binding.setLifecycleOwner(this)
     }

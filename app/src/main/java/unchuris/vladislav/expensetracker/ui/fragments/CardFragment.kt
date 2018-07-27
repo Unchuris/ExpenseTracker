@@ -12,8 +12,11 @@ import unchuris.vladislav.expensetracker.utils.cardBalance.ICardAdapter
 
 class CardFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         cardView.maxCardElevation = cardView.cardElevation * ICardAdapter.MAX_ELEVATION_FACTOR
         return inflater.inflate(R.layout.fragment_adapter, container, false)
     }
