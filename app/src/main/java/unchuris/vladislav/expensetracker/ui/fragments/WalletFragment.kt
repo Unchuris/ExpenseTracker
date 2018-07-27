@@ -14,10 +14,15 @@ import unchuris.vladislav.expensetracker.databinding.FragmentWalletBinding
 import javax.inject.Inject
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
+import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
 
 class WalletFragment @Inject constructor() : DaggerFragment() {
 
+    private val yData = floatArrayOf(10.0f, 10.0f, 60.00f, 5.00f, 5.00f, 3.00f, 7.0f)
+    private val xData = arrayOf("Mitch", "Jessica", "Mohammad", "Kelsey", "Sam", "Robert", "Ashley")
+
     private lateinit var walletListModel: WalletListModel
+    private lateinit var chartListModel: ChartListModel
     private var binding: FragmentWalletBinding by autoCleared()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -40,6 +45,9 @@ class WalletFragment @Inject constructor() : DaggerFragment() {
         swipelayout.setOnRefreshListener { swipelayout.postDelayed({
             swipelayout.isRefreshing = false
         }, 3000) }
+
+        chartListModel = ViewModelProviders.of(this).get(ChartListModel::class.java)
+        binding.chartModel = chartListModel
 
         binding.setLifecycleOwner(this)
     }

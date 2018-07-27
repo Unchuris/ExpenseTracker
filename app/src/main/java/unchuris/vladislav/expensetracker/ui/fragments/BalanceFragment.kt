@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_wallet.*
 import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.FragmentBalanceBinding
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel

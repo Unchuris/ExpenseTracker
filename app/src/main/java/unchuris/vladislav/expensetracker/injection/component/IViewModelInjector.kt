@@ -2,6 +2,7 @@ package unchuris.vladislav.expensetracker.injection.component
 
 import dagger.Component
 import unchuris.vladislav.expensetracker.injection.module.NetworkModule
+import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import javax.inject.Singleton
@@ -12,6 +13,7 @@ interface IViewModelInjector {
 
     fun inject(postListViewModel: PostListViewModel)
     fun inject(moneyListModel: WalletListModel)
+    fun inject(moneyListModel: ChartListModel)
 
     @Component.Builder
     interface Builder {

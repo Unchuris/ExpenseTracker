@@ -32,4 +32,4 @@ object NetworkModule {
     }
 }
 
-val BASE_URL: String = "Http://fragment_wallet.com"
+val BASE_URL: String = "https://free.currencyconverterapi.com/api/v5/"

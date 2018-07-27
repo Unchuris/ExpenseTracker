@@ -10,6 +10,9 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.TextView
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import kotlinx.android.synthetic.main.fragment_wallet.*
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListAdapter
 import unchuris.vladislav.expensetracker.utils.extension.getParentActivity
 
@@ -44,4 +47,14 @@ fun setAdapter(view: ViewPager, adapter: PagerAdapter) {
 @BindingAdapter("pageTransformer")
 fun setPageTransformer(view: ViewPager, adapter: WalletListAdapter) {
     view.setPageTransformer(false, ShadowTransformer(view, adapter))
+}
+
+@BindingAdapter("data")
+fun setData(view: PieChart, data: PieData) {
+    view.setRotationEnabled(true)
+    view.setHoleRadius(25f)
+    view.setTransparentCircleAlpha(0)
+    view.setDrawHoleEnabled(false)
+    view.data = data
+    view.invalidate()
 }
