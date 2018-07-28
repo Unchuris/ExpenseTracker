@@ -9,7 +9,7 @@ import unchuris.vladislav.expensetracker.databinding.ItemPostBinding
 import unchuris.vladislav.expensetracker.model.Transaction
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
-    private var list: List<Transaction> = emptyList()
+    private var list: MutableList<Transaction> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemPostBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_post, parent, false)
@@ -24,8 +24,13 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
         return list.size
     }
 
-    fun updatePostList(postList: List<Transaction>) {
+    fun updatePostList(postList: MutableList<Transaction>) {
         this.list = postList
+        notifyDataSetChanged()
+    }
+
+    fun addTransaction(transaction: Transaction) {
+        list.add(transaction)
         notifyDataSetChanged()
     }
 

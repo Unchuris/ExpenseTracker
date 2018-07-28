@@ -1,23 +1,37 @@
 package unchuris.vladislav.expensetracker.ui.transaction
 
 import android.arch.lifecycle.MutableLiveData
+import unchuris.vladislav.expensetracker.base.BaseApplication.Companion.string
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Transaction
 
 class PostViewModel : BaseViewModel() {
-    private val postTitle = MutableLiveData<String>()
-    private val postBody = MutableLiveData<String>()
+    private val date = MutableLiveData<String>()
+    private val amount = MutableLiveData<String>()
+    private val operationType = MutableLiveData<String>()
+    private val currency = MutableLiveData<String>()
 
     fun bind(post: Transaction) {
-        postTitle.value = post.type.name
-        postBody.value = post.money.toString()
+        date.value = post.date.toString()
+        amount.value = String.format("%.2f", post.amount)
+        operationType.value = post.operationType.toString()
+        currency.value = string(post.currency.shortName)
     }
 
-    fun getPostTitle(): MutableLiveData<String> {
-        return postTitle
+    fun getDate(): MutableLiveData<String> {
+        return date
     }
 
-    fun getPostBody(): MutableLiveData<String> {
-        return postBody
+    fun getAmount(): MutableLiveData<String> {
+        return amount
     }
+
+    fun getOperationType(): MutableLiveData<String> {
+        return operationType
+    }
+
+    fun getCurrency(): MutableLiveData<String> {
+        return currency
+    }
+
 }

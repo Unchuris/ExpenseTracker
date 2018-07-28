@@ -18,8 +18,6 @@ import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
 
 class WalletFragment @Inject constructor() : DaggerFragment() {
 
-    private val yData = floatArrayOf(10.0f, 10.0f, 60.00f, 5.00f, 5.00f, 3.00f, 7.0f)
-    private val xData = arrayOf("Mitch", "Jessica", "Mohammad", "Kelsey", "Sam", "Robert", "Ashley")
 
     private lateinit var walletListModel: WalletListModel
     private lateinit var chartListModel: ChartListModel

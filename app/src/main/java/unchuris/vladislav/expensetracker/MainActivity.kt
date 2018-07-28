@@ -38,8 +38,9 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         drawer.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-
-        supportFragmentManager.beginTransaction().replace(R.id.container_main, walletFragment).addToBackStack(null).commit()
+        if(savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().replace(R.id.container_main, walletFragment).commit()
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -76,4 +77,5 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
             super.onBackPressed()
         }
     }
+
 }

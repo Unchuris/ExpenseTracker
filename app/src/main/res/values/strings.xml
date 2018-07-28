@@ -17,12 +17,43 @@
     <string name="fullInfo">Это приложение для учета финансов</string>
 
 
-    <string name="title_1">Cool card</string>
-    <string name="title_2">Ok card</string>
-    <string name="title_3">Bad card</string>
-    <string name="title_4">Ugly card</string>
+    <string name="food">FOOD</string>
+    <string name="clothes">clothes</string>
+    <string name="service">service</string>
+    <string name="sport">sport</string>
+    <string name="house">house</string>
+    <string name="relaxation">relaxation</string>
+    <string name="other">other</string>
 
-    <string name="text_1">TEXT</string>
+
+    <string name="transaction_title_add">transaction_title_add</string>
+    <string name="transaction_amount">transaction_amount</string>
+    <string name="transaction_category">transaction_category</string>
+    <string name="transaction_currency">transaction_currency</string>
+    <string name="transaction_wallet">transaction_wallet</string>
+    <string name="add">add</string>
+
+    <string-array name="currencies">
+        <item>@string/rub</item>
+        <item>@string/usd</item>
+    </string-array>
+
+    <string-array name="wallets">
+        <item>"Наличные"</item>
+        <item>"Карта"</item>
+        <item>"Что-то еще"</item>
+    </string-array>
+
+
+    <string-array name="transaction_categories">
+        <item>@string/food</item>
+        <item>@string/clothes</item>
+        <item>@string/service</item>
+        <item>@string/sport</item>
+        <item>@string/house</item>
+        <item>@string/relaxation</item>
+        <item>@string/other</item>
+    </string-array>
 
 
 </resources>

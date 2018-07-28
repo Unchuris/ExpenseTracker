@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Transaction
 import unchuris.vladislav.expensetracker.network.ITransactionApi
+import unchuris.vladislav.expensetracker.repository.TransactionRepository
 import javax.inject.Inject
 
 class PostListViewModel : BaseViewModel() {
@@ -21,7 +22,9 @@ class PostListViewModel : BaseViewModel() {
     val postListAdapter: PostListAdapter = PostListAdapter()
 
     init {
-        subscription = postApi.getTransactions()
+        val mockTransaction = TransactionRepository()
+        subscription = mockTransaction.getAllTransactions()
+        //subscription = postApi.getTransactions()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrievePostListStart() }
@@ -41,7 +44,7 @@ class PostListViewModel : BaseViewModel() {
     }
 
     private fun onRetrievePostListSuccess(postList: List<Transaction>) {
-        postListAdapter.updatePostList(postList)
+        postListAdapter.updatePostList(postList as MutableList<Transaction>)
     }
 
     private fun onRetrievePostListError() {
@@ -50,5 +53,10 @@ class PostListViewModel : BaseViewModel() {
     override fun onCleared() {
         super.onCleared()
         subscription.dispose()
+    }
+
+
+    fun addTransaction(transaction: Transaction) {
+        postListAdapter.addTransaction(transaction)
     }
 }

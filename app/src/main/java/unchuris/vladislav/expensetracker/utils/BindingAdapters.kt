@@ -50,11 +50,14 @@ fun setPageTransformer(view: ViewPager, adapter: WalletListAdapter) {
 }
 
 @BindingAdapter("data")
-fun setData(view: PieChart, data: PieData) {
-    view.setRotationEnabled(true)
-    view.setHoleRadius(25f)
-    view.setTransparentCircleAlpha(0)
-    view.setDrawHoleEnabled(false)
-    view.data = data
-    view.invalidate()
+fun setData(view: PieChart, data: PieData?) {
+    if (data != null) {
+        view.isRotationEnabled = true
+        view.holeRadius = 25f
+        view.setTransparentCircleAlpha(0)
+        view.isDrawHoleEnabled = false
+        view.data = data
+        view.invalidate()
+    }
+
 }

@@ -6,29 +6,64 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
+import unchuris.vladislav.expensetracker.model.Transaction
+import unchuris.vladislav.expensetracker.repository.TransactionRepository
 
 class ChartListModel : BaseViewModel() {
+
+    private lateinit var subscription: Disposable
 
     val chartData: MutableLiveData<PieData> = MutableLiveData()
 
     init {
-        chartData.value = getTransactions()
+        val mockTransaction = TransactionRepository()
+        subscription = mockTransaction.getAllTransactions()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { onRetrievePostListStart() }
+                .doOnTerminate { onRetrievePostListFinish() }
+                .subscribe(
+                        { result -> onRetrievePostListSuccess(result) },
+                        { onRetrievePostListError() }
+                )
     }
 
-    private fun getTransactions(): PieData {
-        val yData = floatArrayOf(10.0f, 10.0f, 60.00f, 5.00f, 5.00f, 3.00f, 7.0f)
-        val xData = arrayOf("Mitch", "Jessica", "Mohammad", "Kelsey", "Sam", "Robert", "Ashley")
+    private fun onRetrievePostListStart() {
+
+    }
+
+    private fun onRetrievePostListFinish() {
+
+    }
+
+    private fun onRetrievePostListSuccess(postList: List<Transaction>) {
+        val hashMap = HashMap<String, Float>()
+        for (i in 0 until postList.size) {
+            hashMap[postList[i].transactionType.name] = postList[i].amount.toFloat()
+        }
         val yEntrys = ArrayList<PieEntry>()
         val xEntrys = ArrayList<String>()
-        for (i in 0 until yData.size) {
-            yEntrys.add(PieEntry(yData[i], i))
+        var i = 0
+        hashMap.forEach{
+            yEntrys.add(PieEntry(it.value, ++i))
+            xEntrys.add(it.key)
         }
+        chartData.value = getTransactions(yEntrys, xEntrys)
+    }
 
-        for (i in 1 until xData.size) {
-            xEntrys.add(xData[i])
-        }
+    private fun onRetrievePostListError() {
+    }
 
+    override fun onCleared() {
+        super.onCleared()
+        subscription.dispose()
+    }
+
+    private fun getTransactions(yEntrys: ArrayList<PieEntry>, xEntrys: ArrayList<String>): PieData {
         val pieDataSet = PieDataSet(yEntrys, "Employee Sales")
         pieDataSet.sliceSpace = 2f
         pieDataSet.valueTextSize = 12f

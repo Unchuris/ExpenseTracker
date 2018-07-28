@@ -88,4 +88,7 @@ dependencies {
 
     //MPAndroidChart
     implementation "com.github.PhilJay:MPAndroidChart:$MPAndroidChart_version"
+
+    // RxBinding
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 }

@@ -29,7 +29,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/post_list"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         app:adapter="@{viewModel.getPostListAdapter()}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +37,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add_circle_black_24dp"
+        app:elevation="4dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/post_list"
+        app:layout_anchorGravity="bottom|end|right" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
