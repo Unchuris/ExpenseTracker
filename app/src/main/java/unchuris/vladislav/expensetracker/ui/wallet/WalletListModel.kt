@@ -51,6 +51,8 @@ class WalletListModel : BaseViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        if (::subscription.isInitialized) {
+            subscription.dispose()
+        }
     }
 }
