@@ -47,12 +47,17 @@ class ChartListModel : BaseViewModel() {
         }
         val yEntrys = ArrayList<PieEntry>()
         val xEntrys = ArrayList<String>()
-        var i = 0
+        var d = 0
         hashMap.forEach{
-            yEntrys.add(PieEntry(it.value, ++i))
+            yEntrys.add(PieEntry(it.value, d++))
             xEntrys.add(it.key)
         }
-        chartData.value = getTransactions(yEntrys, xEntrys)
+        val yData = floatArrayOf(10.0f, 10.0f, 60.00f, 5.00f, 5.00f, 3.00f, 7.0f)
+        val yEntrys1 = ArrayList<PieEntry>()
+        for (i in 0 until yData.size) {
+            yEntrys1.add(PieEntry(yData[i], i))
+        }
+        chartData.value = getTransactions(yEntrys1, xEntrys)
     }
 
     private fun onRetrievePostListError() {

@@ -12,7 +12,7 @@ class WalletViewModel : BaseViewModel() {
     private val amount = MutableLiveData<String>()
 
     fun bind(post: Wallet) {
-        typeWallet.value = post.type
+        typeWallet.value = post.type.toString()
         typeCurrency.value = string(post.money.currency.shortName)
         amount.value = String.format("%.2f", post.money.value)
     }

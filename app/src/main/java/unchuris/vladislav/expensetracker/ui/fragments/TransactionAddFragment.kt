@@ -6,26 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_transaction_add.*
-import unchuris.vladislav.expensetracker.model.Transaction
-import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.functions.BiFunction
-import unchuris.vladislav.expensetracker.model.OperationType
-import unchuris.vladislav.expensetracker.model.TransactionType
-import unchuris.vladislav.expensetracker.model.Wallet
-import unchuris.vladislav.expensetracker.repository.WalletRepository
 import java.util.*
-import unchuris.vladislav.expensetracker.model.Currency
 import unchuris.vladislav.expensetracker.R
-
+import unchuris.vladislav.expensetracker.model.*
+import unchuris.vladislav.expensetracker.model.Currency
+import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 
 class TransactionAddFragment : DialogFragment() {
 
+    interface AddTransactionCallback {
+        fun onTransactionCreated(transaction: Transaction)
+    }
 
     private lateinit var callback: AddTransactionCallback
-    private lateinit var inputObserver: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,39 +33,60 @@ class TransactionAddFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_create_transaction.setOnClickListener {
-            buildAndPassTransaction()
+            buildTransaction()
         }
         initializeSpinners()
     }
+
+    private var mWallet: MutableList<Wallet> = ArrayList()
 
     private fun initializeSpinners() {
         spinner_transaction_category.adapter = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.transaction_categories))
         spinner_transaction_currency.adapter = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.currencies))
-        spinner_transaction_wallet.adapter = ArrayAdapter<String>(context!!,
-                android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.wallets))
-    }
-
-
-
-    interface AddTransactionCallback {
-        fun onTransactionCreated(transaction: Transaction)
-    }
-
-    private fun buildAndPassTransaction() {
-        val rep = WalletRepository()
-        val wallets = rep.getWallets()
-
-        var walletsList: List<Wallet> = emptyList()
-        wallets.forEach {
-            walletsList = it
+        val walletType = WalletListModel
+        mWallet = walletType.getWallets()
+        val type: Array<String> = Array(mWallet.size) { "" }
+        var d = 0
+        mWallet.forEach{
+            type[d++] = it.type.name
         }
-        val transaction = Transaction(23, Date(), OperationType.INCOME, TransactionType.HOUSE, Currency.RUBLE, 10.00, walletsList[0])
+        spinner_transaction_wallet.adapter = ArrayAdapter<String>(context!!,
+                android.R.layout.simple_list_item_1, type)
+    }
+
+    private fun buildTransaction() {
+        val transactionCategory = when(spinner_transaction_category.selectedItem) {
+            getStringRes(R.string.food)-> TransactionType.FOOD
+            getStringRes(R.string.clothes)-> TransactionType.CLOTHES
+            getStringRes(R.string.service)-> TransactionType.CLOTHES
+            getStringRes(R.string.sport)-> TransactionType.SPORT
+            getStringRes(R.string.house)-> TransactionType.HOUSE
+            getStringRes(R.string.relaxation)-> TransactionType.RELAXATION
+            getStringRes(R.string.other)-> TransactionType.OTHER
+            else -> TransactionType.OTHER
+        }
+
+        val currency = when(spinner_transaction_currency.selectedItem) {
+            getStringRes(R.string.rub) -> Currency.RUBLE
+            getStringRes(R.string.usd) -> Currency.DOLLAR
+            else -> Currency.RUBLE
+        }
+
+        val amount = et_transaction_sum.text.toString().toDouble()
+
+        val chooseWallet = when(spinner_transaction_wallet.selectedItem) {
+            WalletType.BANK_ACCOUNT.name -> mWallet.filter{it.type == WalletType.BANK_ACCOUNT}
+            WalletType.CASH.name -> mWallet.filter{it.type == WalletType.CASH}
+                WalletType.CREDIT_CARD.name -> mWallet.filter{it.type == WalletType.CREDIT_CARD}
+            else -> mWallet.filter{it.type == WalletType.CASH}
+        }
+
+        val operationType = if (amount > 0) OperationType.INCOME else OperationType.SPEND
+        val transaction = Transaction(2, Date(), operationType, transactionCategory, currency, amount, chooseWallet[0])
         callback.onTransactionCreated(transaction)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-    }
+    private fun getStringRes(resId: Int): String = context!!.resources.getString(resId)
 }

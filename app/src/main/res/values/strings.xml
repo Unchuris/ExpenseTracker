@@ -17,14 +17,13 @@
     <string name="fullInfo">Это приложение для учета финансов</string>
 
 
-    <string name="food">FOOD</string>
+    <string name="food">food</string>
     <string name="clothes">clothes</string>
     <string name="service">service</string>
     <string name="sport">sport</string>
     <string name="house">house</string>
     <string name="relaxation">relaxation</string>
     <string name="other">other</string>
-
 
     <string name="transaction_title_add">transaction_title_add</string>
     <string name="transaction_amount">transaction_amount</string>
@@ -38,13 +37,6 @@
         <item>@string/usd</item>
     </string-array>
 
-    <string-array name="wallets">
-        <item>"Наличные"</item>
-        <item>"Карта"</item>
-        <item>"Что-то еще"</item>
-    </string-array>
-
-
     <string-array name="transaction_categories">
         <item>@string/food</item>
         <item>@string/clothes</item>
@@ -55,5 +47,14 @@
         <item>@string/other</item>
     </string-array>
 
+    <string name="credit_card">Кредитная карта</string>
+    <string name="cash">Кредитная карта</string>
+    <string name="bank_account">Наличные</string>
+
+    <string-array name="wallets">
+        <item>@string/credit_card</item>
+        <item>@string/cash</item>
+        <item>@string/bank_account</item>
+    </string-array>
 
 </resources>

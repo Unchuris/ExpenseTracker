@@ -21,18 +21,28 @@ class PostListViewModel : BaseViewModel() {
 
     val postListAdapter: PostListAdapter = PostListAdapter()
 
+    companion object {
+        private var transaction: MutableList<Transaction> = ArrayList()
+
+        fun getTransaction(): MutableList<Transaction> = transaction
+    }
+
     init {
-        val mockTransaction = TransactionRepository()
-        subscription = mockTransaction.getAllTransactions()
-        //subscription = postApi.getTransactions()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onRetrievePostListStart() }
-                .doOnTerminate { onRetrievePostListFinish() }
-                .subscribe(
-                        { result -> onRetrievePostListSuccess(result) },
-                        { onRetrievePostListError() }
-                )
+        if (transaction.isEmpty()) {
+            val mockTransaction = TransactionRepository()
+            subscription = mockTransaction.getAllTransactions()
+                    //subscription = postApi.getTransactions()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { onRetrievePostListStart() }
+                    .doOnTerminate { onRetrievePostListFinish() }
+                    .subscribe(
+                            { result -> onRetrievePostListSuccess(result) },
+                            { onRetrievePostListError() }
+                    )
+        } else {
+            postListAdapter.updatePostList(transaction)
+        }
     }
 
     private fun onRetrievePostListStart() {
@@ -45,6 +55,7 @@ class PostListViewModel : BaseViewModel() {
 
     private fun onRetrievePostListSuccess(postList: List<Transaction>) {
         postListAdapter.updatePostList(postList as MutableList<Transaction>)
+        transaction = postList
     }
 
     private fun onRetrievePostListError() {
@@ -55,8 +66,8 @@ class PostListViewModel : BaseViewModel() {
         subscription.dispose()
     }
 
-
-    fun addTransaction(transaction: Transaction) {
-        postListAdapter.addTransaction(transaction)
+    fun addTransaction(t: Transaction) {
+        postListAdapter.addTransaction(t)
+        transaction.add(t)
     }
 }

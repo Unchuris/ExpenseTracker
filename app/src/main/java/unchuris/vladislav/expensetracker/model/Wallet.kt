@@ -1,3 +1,4 @@
 package unchuris.vladislav.expensetracker.model
+import java.util.UUID;
 
-class Wallet(val type: String, val money: Money)
+class Wallet(val uuid: UUID , val type: WalletType, val money: Money)

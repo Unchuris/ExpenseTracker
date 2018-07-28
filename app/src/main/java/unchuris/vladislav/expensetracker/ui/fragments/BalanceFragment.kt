@@ -20,12 +20,13 @@ import unchuris.vladislav.expensetracker.utils.autoCleared
 import javax.inject.Inject
 
 class BalanceFragment @Inject constructor() : DaggerFragment(), TransactionAddFragment.AddTransactionCallback {
+
+    private lateinit var transactionAddFragment: TransactionAddFragment
+
     override fun onTransactionCreated(transaction: Transaction) {
         viewModel.addTransaction(transaction)
         transactionAddFragment.dismiss()
     }
-
-    private lateinit var transactionAddFragment: TransactionAddFragment
 
     private var binding: FragmentBalanceBinding by autoCleared()
     private lateinit var viewModel: PostListViewModel
