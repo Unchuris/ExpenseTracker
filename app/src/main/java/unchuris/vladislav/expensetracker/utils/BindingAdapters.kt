@@ -59,5 +59,4 @@ fun setData(view: PieChart, data: PieData?) {
         view.data = data
         view.invalidate()
     }
-
 }

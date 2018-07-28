@@ -10,8 +10,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
+import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.model.Transaction
+import unchuris.vladislav.expensetracker.model.TransactionType
 import unchuris.vladislav.expensetracker.repository.TransactionRepository
+import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 
 class ChartListModel : BaseViewModel() {
 
@@ -20,16 +23,21 @@ class ChartListModel : BaseViewModel() {
     val chartData: MutableLiveData<PieData> = MutableLiveData()
 
     init {
-        val mockTransaction = TransactionRepository()
-        subscription = mockTransaction.getAllTransactions()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onRetrievePostListStart() }
-                .doOnTerminate { onRetrievePostListFinish() }
-                .subscribe(
-                        { result -> onRetrievePostListSuccess(result) },
-                        { onRetrievePostListError() }
-                )
+        val data = PostListViewModel.getListTransaction()
+        if (data.isEmpty()) {
+            val mockTransaction = TransactionRepository()
+            subscription = mockTransaction.getAllTransactions()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { onRetrievePostListStart() }
+                    .doOnTerminate { onRetrievePostListFinish() }
+                    .subscribe(
+                            { result -> onRetrievePostListSuccess(result) },
+                            { onRetrievePostListError() }
+                    )
+        } else {
+            onRetrievePostListSuccess(data)
+        }
     }
 
     private fun onRetrievePostListStart() {
@@ -41,35 +49,40 @@ class ChartListModel : BaseViewModel() {
     }
 
     private fun onRetrievePostListSuccess(postList: List<Transaction>) {
-        val hashMap = HashMap<String, Float>()
-        for (i in 0 until postList.size) {
-            hashMap[postList[i].transactionType.name] = postList[i].amount.toFloat()
-        }
-        val yEntrys = ArrayList<PieEntry>()
-        val xEntrys = ArrayList<String>()
-        var d = 0
-        hashMap.forEach{
-            yEntrys.add(PieEntry(it.value, d++))
-            xEntrys.add(it.key)
-        }
-        val yData = floatArrayOf(10.0f, 10.0f, 60.00f, 5.00f, 5.00f, 3.00f, 7.0f)
-        val yEntrys1 = ArrayList<PieEntry>()
-        for (i in 0 until yData.size) {
-            yEntrys1.add(PieEntry(yData[i], i))
-        }
-        chartData.value = getTransactions(yEntrys1, xEntrys)
+        chartData.value = getPieData(postList)
     }
+
+    private fun getPieData(postList: List<Transaction>): PieData {
+        var sum = 0f
+        val yEntrys = ArrayList<PieEntry>()
+
+        enumValues<TransactionType>().forEach { category ->
+            postList.filter { el ->
+                (el.transactionType == category) and
+                        (el.operationType == OperationType.SPEND)}.forEach { t ->
+                sum += t.amount.toFloat()
+            }
+            if(sum > 0) {
+                yEntrys.add(PieEntry(sum, category.name))
+            }
+            sum = 0f
+        }
+        return getChart(yEntrys)
+    }
+
 
     private fun onRetrievePostListError() {
     }
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        if (::subscription.isInitialized) {
+            subscription.dispose()
+        }
     }
 
-    private fun getTransactions(yEntrys: ArrayList<PieEntry>, xEntrys: ArrayList<String>): PieData {
-        val pieDataSet = PieDataSet(yEntrys, "Employee Sales")
+    private fun getChart(yEntrys: ArrayList<PieEntry>): PieData {
+        val pieDataSet = PieDataSet(yEntrys, "")
         pieDataSet.sliceSpace = 2f
         pieDataSet.valueTextSize = 12f
 

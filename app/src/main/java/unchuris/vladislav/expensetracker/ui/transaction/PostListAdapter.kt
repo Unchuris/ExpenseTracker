@@ -25,7 +25,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
     }
 
     fun updatePostList(postList: MutableList<Transaction>) {
-        this.list = postList
+        list = postList
         notifyDataSetChanged()
     }
 

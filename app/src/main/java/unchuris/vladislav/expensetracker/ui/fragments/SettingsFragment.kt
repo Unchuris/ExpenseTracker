@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import unchuris.vladislav.expensetracker.R
-import javax.inject.Inject
 
-class SettingsFragment @Inject constructor() : DaggerFragment() {
+class SettingsFragment: DaggerFragment() {
+
+    companion object {
+        fun newInstance() : SettingsFragment {
+            return SettingsFragment()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_settings, container, false)

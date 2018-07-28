@@ -16,6 +16,11 @@
     <string name="infoTitle">О приложении</string>
     <string name="fullInfo">Это приложение для учета финансов</string>
 
+    <string name="toolbar_title_finance">ExpenseTracker</string>
+    <string name="toolbar_title_settings">Settings</string>
+    <string name="toolbar_title_about">About</string>
+    <string name="toolbar_title_transactions">Transactions</string>
+
 
     <string name="food">food</string>
     <string name="clothes">clothes</string>

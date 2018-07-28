@@ -83,7 +83,7 @@ class TransactionAddFragment : DialogFragment() {
             else -> mWallet.filter{it.type == WalletType.CASH}
         }
 
-        val operationType = if (amount > 0) OperationType.INCOME else OperationType.SPEND
+        val operationType = OperationType.SPEND
         val transaction = Transaction(2, Date(), operationType, transactionCategory, currency, amount, chooseWallet[0])
         callback.onTransactionCreated(transaction)
     }

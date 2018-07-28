@@ -7,6 +7,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="?attr/actionBarTheme"-->
+        <!--android:background="@android:color/background_light"-->
+        <!--app:title="@string/toolbar_title_finance" />-->
+
     <FrameLayout
         android:id="@+id/container_main"
         android:layout_width="match_parent"

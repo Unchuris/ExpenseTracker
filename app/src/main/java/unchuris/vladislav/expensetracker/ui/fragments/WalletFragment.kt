@@ -11,13 +11,18 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.FragmentWalletBinding
-import javax.inject.Inject
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
+import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 
-class WalletFragment @Inject constructor() : DaggerFragment() {
+class WalletFragment : DaggerFragment() {
 
+    companion object {
+        fun newInstance() : WalletFragment {
+            return WalletFragment()
+        }
+    }
 
     private lateinit var walletListModel: WalletListModel
     private lateinit var chartListModel: ChartListModel
@@ -43,6 +48,7 @@ class WalletFragment @Inject constructor() : DaggerFragment() {
         swipelayout.setOnRefreshListener { swipelayout.postDelayed({
             swipelayout.isRefreshing = false
         }, 3000) }
+
 
         chartListModel = ViewModelProviders.of(this).get(ChartListModel::class.java)
         binding.chartModel = chartListModel

@@ -1,17 +1,25 @@
 package unchuris.vladislav.expensetracker.ui.transaction
 
 import android.arch.lifecycle.MutableLiveData
+import android.graphics.Color
 import android.view.View
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
+import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.model.Transaction
+import unchuris.vladislav.expensetracker.model.TransactionType
 import unchuris.vladislav.expensetracker.network.ITransactionApi
 import unchuris.vladislav.expensetracker.repository.TransactionRepository
 import javax.inject.Inject
 
 class PostListViewModel : BaseViewModel() {
+
     @Inject
     lateinit var postApi: ITransactionApi
 
@@ -21,14 +29,17 @@ class PostListViewModel : BaseViewModel() {
 
     val postListAdapter: PostListAdapter = PostListAdapter()
 
-    companion object {
-        private var transaction: MutableList<Transaction> = ArrayList()
+    val chartData: MutableLiveData<PieData> = MutableLiveData()
 
-        fun getTransaction(): MutableList<Transaction> = transaction
+
+    companion object {
+        private var listCurrentTransaction : MutableList<Transaction> = ArrayList()
+
+        fun getListTransaction(): MutableList<Transaction> = listCurrentTransaction
     }
 
     init {
-        if (transaction.isEmpty()) {
+        if (listCurrentTransaction.isEmpty()) {
             val mockTransaction = TransactionRepository()
             subscription = mockTransaction.getAllTransactions()
                     //subscription = postApi.getTransactions()
@@ -41,7 +52,7 @@ class PostListViewModel : BaseViewModel() {
                             { onRetrievePostListError() }
                     )
         } else {
-            postListAdapter.updatePostList(transaction)
+            postListAdapter.updatePostList(listCurrentTransaction)
         }
     }
 
@@ -55,7 +66,7 @@ class PostListViewModel : BaseViewModel() {
 
     private fun onRetrievePostListSuccess(postList: List<Transaction>) {
         postListAdapter.updatePostList(postList as MutableList<Transaction>)
-        transaction = postList
+        listCurrentTransaction = postList
     }
 
     private fun onRetrievePostListError() {
@@ -63,11 +74,13 @@ class PostListViewModel : BaseViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        if (::subscription.isInitialized) {
+            subscription.dispose()
+        }
     }
 
-    fun addTransaction(t: Transaction) {
+    fun addNewTransaction(t: Transaction) {
         postListAdapter.addTransaction(t)
-        transaction.add(t)
     }
+
 }

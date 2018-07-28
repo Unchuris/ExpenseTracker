@@ -7,7 +7,6 @@ import java.util.*
 
 class TransactionRepository {
 
-
     fun getAllTransactions(): Observable<List<Transaction>> {
         val transactionsHardcode = ArrayList<Transaction>()
 
@@ -46,5 +45,9 @@ class TransactionRepository {
         transactionsHardcode.add(item13)
 
         return Observable.just(transactionsHardcode)
+    }
+
+    fun getAllTransactionType() {
+
     }
 }
