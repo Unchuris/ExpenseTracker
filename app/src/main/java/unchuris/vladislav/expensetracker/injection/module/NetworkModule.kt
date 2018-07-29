@@ -32,4 +32,4 @@ object NetworkModule {
     }
 }
 
-val BASE_URL: String = "https://free.currencyconverterapi.com/api/v5/"
+val BASE_URL: String = "https://free.currencyconverterapi.com/api/v6/"

@@ -3,8 +3,6 @@ package unchuris.vladislav.expensetracker.ui.wallet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_wallet.*
-import unchuris.vladislav.expensetracker.base.BaseApplication
 import unchuris.vladislav.expensetracker.base.BaseViewModel
 import unchuris.vladislav.expensetracker.model.Wallet
 import unchuris.vladislav.expensetracker.repository.WalletRepository

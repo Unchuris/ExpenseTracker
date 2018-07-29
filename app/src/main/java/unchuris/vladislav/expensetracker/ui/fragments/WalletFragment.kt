@@ -14,7 +14,7 @@ import unchuris.vladislav.expensetracker.databinding.FragmentWalletBinding
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
-import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
+import unchuris.vladislav.expensetracker.ui.wallet.RateModel
 
 class WalletFragment : DaggerFragment() {
 
@@ -26,6 +26,7 @@ class WalletFragment : DaggerFragment() {
 
     private lateinit var walletListModel: WalletListModel
     private lateinit var chartListModel: ChartListModel
+    private lateinit var rateModel: RateModel
     private var binding: FragmentWalletBinding by autoCleared()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -52,6 +53,8 @@ class WalletFragment : DaggerFragment() {
 
         chartListModel = ViewModelProviders.of(this).get(ChartListModel::class.java)
         binding.chartModel = chartListModel
+
+        rateModel = ViewModelProviders.of(this).get(RateModel::class.java)
 
         binding.setLifecycleOwner(this)
     }
