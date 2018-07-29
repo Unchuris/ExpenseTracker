@@ -29,13 +29,10 @@ class BalanceFragment: DaggerFragment(), TransactionAddFragment.AddTransactionCa
 
     override fun onTransactionCreated(transaction: Transaction) {
         viewModel.addNewTransaction(transaction)
-        //walletListModel.changeWallet(transaction)
-        transactionAddFragment.dismiss()
     }
 
     private var binding: FragmentBalanceBinding by autoCleared()
     private lateinit var viewModel: PostListViewModel
-    //private lateinit var walletListModel: WalletListModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(
@@ -65,4 +62,5 @@ class BalanceFragment: DaggerFragment(), TransactionAddFragment.AddTransactionCa
         transactionAddFragment = TransactionAddFragment()
         transactionAddFragment.show(childFragmentManager, TAG)
     }
+
 }

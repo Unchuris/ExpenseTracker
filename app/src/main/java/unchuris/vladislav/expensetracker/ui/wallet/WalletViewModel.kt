@@ -14,7 +14,7 @@ class WalletViewModel : BaseViewModel() {
     fun bind(post: Wallet) {
         typeWallet.value = post.type.toString()
         typeCurrency.value = string(post.money.currency.shortName)
-        amount.value = String.format("%.2f", post.money.value)
+        amount.value = String.format("%.2f", post.money.value) + " " + string(post.money.currency.shortName)
     }
 
     fun getTypeWallet(): MutableLiveData<String> {
