@@ -16,17 +16,18 @@ class RateModel: BaseViewModel() {
 
     private lateinit var subscription: Disposable
 
-    val listRate: MutableLiveData<Int> = MutableLiveData()
-
-    companion object {
-        private val rateMap = HashMap<String, Double>()
-
-        fun getRateMap(): HashMap<String, Double> = rateMap
-    }
+    val rateMap: MutableLiveData<HashMap<String, Double>> = MutableLiveData()
 
     private val mas = arrayListOf("USD_RUB","RUB_USD")
 
+    companion object {
+        private var rateMapSave: HashMap<String, Double> = HashMap()
+
+        fun getRate(): HashMap<String, Double> = rateMapSave
+    }
+
     init {
+        rateMap.value = HashMap()
         subscription = api.getRate(mas.toArray().joinToString(","))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,12 +49,14 @@ class RateModel: BaseViewModel() {
 
     private fun onRetrievePostListSuccess(call: Map<String, RateValue>) {
         mas.forEach{
-            rateMap[it] = call[it]!!.`val`
+            rateMap.value!![it] = call[it]!!.`val`
         }
+        rateMap.postValue(rateMap.value)
+        rateMapSave = rateMap.value!!
     }
 
     private fun onRetrievePostListError() {
-
+        rateMap.value = getRate()
     }
 
     override fun onCleared() {

@@ -22,6 +22,8 @@ class ChartListModel : BaseViewModel() {
 
     val chartData: MutableLiveData<PieData> = MutableLiveData()
 
+    var rateMapSave: HashMap<String, Double> = HashMap()
+
     init {
         val data = PostListViewModel.getListTransaction()
         if (data.isEmpty()) {
@@ -40,6 +42,10 @@ class ChartListModel : BaseViewModel() {
         }
     }
 
+    fun setRate(map: HashMap<String, Double>) {
+        rateMapSave = map
+    }
+
     private fun onRetrievePostListStart() {
 
     }
@@ -53,6 +59,7 @@ class ChartListModel : BaseViewModel() {
     }
 
     private fun getPieData(postList: List<Transaction>): PieData {
+        val d = rateMapSave
         var sum = 0f
         val yEntrys = ArrayList<PieEntry>()
 

@@ -1,19 +1,12 @@
 package unchuris.vladislav.expensetracker.ui.transaction
 
 import android.arch.lifecycle.MutableLiveData
-import android.graphics.Color
 import android.view.View
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
-import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.model.Transaction
-import unchuris.vladislav.expensetracker.model.TransactionType
 import unchuris.vladislav.expensetracker.network.ITransactionApi
 import unchuris.vladislav.expensetracker.repository.TransactionRepository
 import javax.inject.Inject
@@ -28,9 +21,6 @@ class PostListViewModel : BaseViewModel() {
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     val postListAdapter: PostListAdapter = PostListAdapter()
-
-    val chartData: MutableLiveData<PieData> = MutableLiveData()
-
 
     companion object {
         private var listCurrentTransaction : MutableList<Transaction> = ArrayList()

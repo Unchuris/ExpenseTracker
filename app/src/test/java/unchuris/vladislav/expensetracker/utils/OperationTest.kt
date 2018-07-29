@@ -1,18 +1,10 @@
 package unchuris.vladislav.expensetracker.utils
 
-import org.junit.Assert
-import org.junit.Test
-import unchuris.vladislav.expensetracker.model.Currency
-import unchuris.vladislav.expensetracker.model.MoneyOperation
-import unchuris.vladislav.expensetracker.model.OperationType
-import unchuris.vladislav.expensetracker.model.Transaction
-import org.junit.Before
-
 class OperationTest {
 
-    private lateinit var money: DoubleArray
-
-    private lateinit var list: List<MoneyOperation>
+//    private lateinit var money: DoubleArray
+//
+//    private lateinit var list: List<MoneyOperation>
 //    @Before
 //    fun setUp() {
 //        money = doubleArrayOf(100.00, 200.00, 140.00, 110.00, 10.00)

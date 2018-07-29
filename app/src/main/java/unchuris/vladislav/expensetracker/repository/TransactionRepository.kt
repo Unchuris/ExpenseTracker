@@ -47,7 +47,4 @@ class TransactionRepository {
         return Observable.just(transactionsHardcode)
     }
 
-    fun getAllTransactionType() {
-
-    }
 }

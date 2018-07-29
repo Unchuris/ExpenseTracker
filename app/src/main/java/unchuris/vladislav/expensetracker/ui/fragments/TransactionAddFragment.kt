@@ -74,8 +74,6 @@ class TransactionAddFragment : DialogFragment() {
             else -> Currency.RUBLE
         }
 
-        val amount = et_transaction_sum.text.toString().toDouble()
-
         val chooseWallet = when(spinner_transaction_wallet.selectedItem) {
             WalletType.BANK_ACCOUNT.name -> mWallet.filter{it.type == WalletType.BANK_ACCOUNT}
             WalletType.CASH.name -> mWallet.filter{it.type == WalletType.CASH}
@@ -84,6 +82,12 @@ class TransactionAddFragment : DialogFragment() {
         }
 
         val operationType = OperationType.SPEND
+
+        val amount = et_transaction_sum.text.toString().toDouble()
+
+        if (operationType == OperationType.SPEND) {
+            amount * -1
+        }
         val transaction = Transaction(2, Date(), operationType, transactionCategory, currency, amount, chooseWallet[0])
         callback.onTransactionCreated(transaction)
     }

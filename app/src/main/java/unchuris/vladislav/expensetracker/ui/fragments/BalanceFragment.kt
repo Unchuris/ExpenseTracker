@@ -14,6 +14,7 @@ import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.FragmentBalanceBinding
 import unchuris.vladislav.expensetracker.model.Transaction
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
+import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 
 class BalanceFragment: DaggerFragment(), TransactionAddFragment.AddTransactionCallback {
@@ -28,11 +29,13 @@ class BalanceFragment: DaggerFragment(), TransactionAddFragment.AddTransactionCa
 
     override fun onTransactionCreated(transaction: Transaction) {
         viewModel.addNewTransaction(transaction)
+        //walletListModel.changeWallet(transaction)
         transactionAddFragment.dismiss()
     }
 
     private var binding: FragmentBalanceBinding by autoCleared()
     private lateinit var viewModel: PostListViewModel
+    //private lateinit var walletListModel: WalletListModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(

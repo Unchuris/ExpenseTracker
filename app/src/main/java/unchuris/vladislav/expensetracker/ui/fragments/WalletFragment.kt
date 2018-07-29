@@ -15,6 +15,9 @@ import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
 import unchuris.vladislav.expensetracker.ui.wallet.RateModel
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import javax.inject.Inject
 
 class WalletFragment : DaggerFragment() {
 
@@ -42,6 +45,7 @@ class WalletFragment : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         walletListModel = ViewModelProviders.of(this).get(WalletListModel::class.java)
+
         binding.walletModel = walletListModel
 
 //        mFragmentCardAdapter = CardFragmentPagerAdapter(childFragmentManager, dpToPixels(2, context))
@@ -50,16 +54,38 @@ class WalletFragment : DaggerFragment() {
             swipelayout.isRefreshing = false
         }, 3000) }
 
+        rateModel = ViewModelProviders.of(this).get(RateModel::class.java)
 
         chartListModel = ViewModelProviders.of(this).get(ChartListModel::class.java)
+
         binding.chartModel = chartListModel
 
-        rateModel = ViewModelProviders.of(this).get(RateModel::class.java)
 
         binding.setLifecycleOwner(this)
     }
 
     private fun dpToPixels(dp: Int, context: Context?): Float {
         return dp * context!!.resources.displayMetrics.density
+    }
+
+    override fun onStart() {
+        super.onStart()
+        subscribeToViewModel()
+    }
+
+    private fun subscribeToViewModel() {
+        rateModel.rateMap.observe(this, Observer { response ->
+            walletListModel.setRate(response!!)
+            chartListModel.setRate(response)
+        })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        removeObservers()
+    }
+
+    private fun removeObservers() {
+        rateModel.rateMap.removeObservers(this)
     }
 }

@@ -14,9 +14,9 @@ class WalletRepository {
         val currentBalance3 = 121.213458976
 
         val walletsHardcode = ArrayList<Wallet>()
-        val item = Wallet(UUID.randomUUID(), WalletType.BANK_ACCOUNT, Money(currentBalance, Currency.RUBLE))
-        val item2 = Wallet(UUID.randomUUID(), WalletType.CASH, Money(currentBalance2, Currency.DOLLAR))
-        val item3 = Wallet(UUID.randomUUID(), WalletType.CREDIT_CARD, Money(currentBalance3, Currency.DOLLAR))
+        val item = Wallet(0, UUID.randomUUID(), WalletType.BANK_ACCOUNT, Money(currentBalance, Currency.RUBLE))
+        val item2 = Wallet(1, UUID.randomUUID(), WalletType.CASH, Money(currentBalance2, Currency.DOLLAR))
+        val item3 = Wallet(2, UUID.randomUUID(), WalletType.CREDIT_CARD, Money(currentBalance3, Currency.DOLLAR))
 
         walletsHardcode.add(item)
         walletsHardcode.add(item2)

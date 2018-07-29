@@ -15,7 +15,9 @@ import java.util.ArrayList
 class WalletListAdapter : PagerAdapter(), ICardAdapter {
 
     private val mViews: MutableList<CardView?>
+
     private var mData: MutableList<Wallet>
+
     private var mBaseElevation: Float = 0.toFloat()
 
     init {
@@ -25,8 +27,16 @@ class WalletListAdapter : PagerAdapter(), ICardAdapter {
 
     fun addCardItem(item: Wallet) {
         mViews.add(null)
-        mData.add(item)
+        mData.add(item.id, item)
         notifyDataSetChanged()
+    }
+
+    fun updateCardItem(item: List<Wallet>) {
+        mData.clear()
+        mViews.clear()
+        item.forEach{
+            addCardItem(it)
+        }
     }
 
     override fun getBaseElevation(): Float {
