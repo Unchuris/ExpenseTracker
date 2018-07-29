@@ -14,101 +14,79 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <!--<TextView-->
-            <!--android:id="@+id/post_title"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textStyle="bold"-->
-            <!--app:mutableText="@{viewModel.getPostTitle()}"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/post_body"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--app:mutableText="@{viewModel.getPostBody()}"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/post_title" />-->
-
         <TextView
             android:id="@+id/tv_date"
-            style="@style/TextStyle.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="date"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_amount"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_group_name"
             app:mutableText="@{viewModel.getDate()}"/>
 
         <ImageView
-            android:id="@+id/iv_currency_type"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
+            android:id="@+id/tv_group_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_date"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_info_black_24dp" />
-
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/iv_currency_type"
-            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
-
-        <TextView
-            style="@style/TextStyle.Small"
-            android:id="@+id/tv_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:textAlignment="viewEnd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_date"
-            app:mutableText="@{viewModel.getCurrency()}"/>
-
-        <TextView
-            android:id="@+id/tv_transaction_category"
-            style="@style/TextStyle.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_currency_type"
-            app:layout_constraintStart_toEndOf="@+id/iv_currency_type"
-            app:layout_constraintTop_toBottomOf="@+id/tv_time"
-            app:mutableText="@{viewModel.getOperationType()}"/>
 
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_currency_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_transaction_category"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_currency"
-            style="@style/TextStyle.Small"
+            android:layout_weight="1"
+            android:text="1000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_currency"
+            app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/black"
+            style="@style/TextStyle.Large"
             app:mutableText="@{viewModel.getAmount()}"/>
+
+        <TextView
+            android:id="@+id/tv_transaction_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="INCOME"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_amount"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/TextStyle.Small"
+            app:mutableText="@{viewModel.getOperationType()}"/>
+
+        <TextView
+            android:id="@+id/tv_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="RUB"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/TextStyle.Large"
+            app:mutableText="@{viewModel.getCurrency()}"/>
 
         <View
             android:layout_width="wrap_content"
@@ -116,21 +94,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:background="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_currency_type"
-            app:layout_constraintStart_toEndOf="@+id/iv_currency_type"
-            app:layout_constraintTop_toBottomOf="@+id/tv_amount" />
-
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_currency"
-            app:layout_constraintStart_toEndOf="@+id/tv_time"
-            app:layout_constraintTop_toBottomOf="@+id/tv_date"
-            android:text="1111111111111111111111111111111"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_amount"
+            android:paddingBottom="4dp"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

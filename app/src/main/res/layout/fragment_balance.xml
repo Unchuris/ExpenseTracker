@@ -9,7 +9,7 @@
             type="unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_marginBottom="8dp"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
@@ -28,14 +28,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/post_list"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:adapter="@{viewModel.getPostListAdapter()}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:adapter="@{viewModel.getPostListAdapter()}" />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -52,5 +47,5 @@
         app:layout_anchor="@id/post_list"
         app:layout_anchorGravity="bottom|end|right" />
 
-    </android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>
