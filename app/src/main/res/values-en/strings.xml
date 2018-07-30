@@ -12,7 +12,65 @@
     <string name="rubShort">RUB</string>
     <string name="usdShort">USD</string>
     <string name="about_application">About application</string>
-    <string name="other_settings">Other_settings</string>
+    <string name="other_settings">Other settings</string>
     <string name="infoTitle">About application</string>
     <string name="fullInfo">This application is for finance tracker</string>
+    <string name="late">"That's all for now"</string>
+    <string name="toolbar_title_finance">ExpenseTracker</string>
+    <string name="toolbar_title_settings">Settings</string>
+    <string name="toolbar_title_about">About</string>
+    <string name="toolbar_title_transactions">Transactions</string>
+    <string name="validate_toast">Incorrect input data</string>
+    <string name="spend">Spend</string>
+    <string name="income">Income</string>
+
+    <string name="food">Food</string>
+    <string name="clothes">Clothes</string>
+    <string name="service">Service</string>
+    <string name="sport">Sport</string>
+    <string name="house">House</string>
+    <string name="relaxation">Relaxation</string>
+    <string name="other">Other</string>
+    <string name="icon">Icon</string>
+
+    <string name="transaction_title_add">Add transaction</string>
+    <string name="transaction_amount">Amount</string>
+    <string name="transaction_category">Category</string>
+    <string name="transaction_currency">Currency</string>
+    <string name="transaction_wallet">Wallet</string>
+    <string name="operation_type">Operation type</string>
+    <string name="add">add</string>
+    <string name="chartDescription">All spends for wallets.</string>
+    <string name="transaction">Transaction</string>
+
+    <string-array name="currencies">
+        <item>@string/rub</item>
+        <item>@string/usd</item>
+    </string-array>
+
+    <string-array name="operation_type">
+        <item>@string/income</item>
+        <item>@string/spend</item>
+    </string-array>
+
+    <string-array name="transaction_categories">
+        <item>@string/food</item>
+        <item>@string/clothes</item>
+        <item>@string/service</item>
+        <item>@string/sport</item>
+        <item>@string/house</item>
+        <item>@string/relaxation</item>
+        <item>@string/other</item>
+    </string-array>
+
+    <string name="credit_card">Credit card</string>
+    <string name="cash">Cash</string>
+    <string name="bank_account">Bank account</string>
+
+    <string-array name="wallets">
+        <item>@string/credit_card</item>
+        <item>@string/cash</item>
+        <item>@string/bank_account</item>
+    </string-array>
+
 </resources>

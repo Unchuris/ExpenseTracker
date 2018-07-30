@@ -10,19 +10,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import unchuris.vladislav.expensetracker.base.BaseViewModel
+import unchuris.vladislav.expensetracker.model.Currency
 import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.model.Transaction
 import unchuris.vladislav.expensetracker.model.TransactionType
 import unchuris.vladislav.expensetracker.repository.TransactionRepository
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
+import unchuris.vladislav.expensetracker.ui.wallet.RateModel
+import unchuris.vladislav.expensetracker.utils.OperationUtils
 
 class ChartListModel : BaseViewModel() {
 
     private lateinit var subscription: Disposable
 
     val chartData: MutableLiveData<PieData> = MutableLiveData()
-
-    var rateMapSave: HashMap<String, Double> = HashMap()
 
     init {
         val data = PostListViewModel.getListTransaction()
@@ -42,9 +43,6 @@ class ChartListModel : BaseViewModel() {
         }
     }
 
-    fun setRate(map: HashMap<String, Double>) {
-        rateMapSave = map
-    }
 
     private fun onRetrievePostListStart() {
 
@@ -59,26 +57,31 @@ class ChartListModel : BaseViewModel() {
     }
 
     private fun getPieData(postList: List<Transaction>): PieData {
-        val d = rateMapSave
+        val ou = OperationUtils(RateModel.getRate())
         var sum = 0f
         val yEntrys = ArrayList<PieEntry>()
-
         enumValues<TransactionType>().forEach { category ->
             postList.filter { el ->
                 (el.transactionType == category) and
                         (el.operationType == OperationType.SPEND)}.forEach { t ->
-                sum += t.amount.toFloat()
+                sum += if (t.currency != Currency.DOLLAR) {
+                    ou.convert(t.amount, t.currency, Currency.DOLLAR).toFloat()
+                } else t.amount.toFloat()
             }
+
             if(sum > 0) {
                 yEntrys.add(PieEntry(sum, category.name))
             }
+
             sum = 0f
         }
+
         return getChart(yEntrys)
     }
 
 
     private fun onRetrievePostListError() {
+
     }
 
     override fun onCleared() {
@@ -88,25 +91,4 @@ class ChartListModel : BaseViewModel() {
         }
     }
 
-    private fun getChart(yEntrys: ArrayList<PieEntry>): PieData {
-        val pieDataSet = PieDataSet(yEntrys, "")
-        pieDataSet.sliceSpace = 2f
-        pieDataSet.valueTextSize = 12f
-
-        val colors = ArrayList<Int>()
-        colors.add(Color.GRAY)
-        colors.add(Color.BLUE)
-        colors.add(Color.RED)
-        colors.add(Color.GREEN)
-        colors.add(Color.CYAN)
-        colors.add(Color.YELLOW)
-        colors.add(Color.MAGENTA)
-
-        pieDataSet.colors = colors
-
-        val pieData = PieData(pieDataSet)
-        pieData.setValueFormatter(PercentFormatter())
-
-        return pieData
-    }
 }

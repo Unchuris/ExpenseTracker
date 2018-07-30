@@ -49,15 +49,8 @@ class TransactionAddFragment : DialogFragment() {
                 android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.currencies))
         spinner_operation_type.adapter = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.operation_type))
-        val walletType = WalletListModel
-        mWallet = walletType.getWallets()
-        val type: Array<String> = Array(mWallet.size) { "" }
-        var d = 0
-        mWallet.forEach{
-            type[d++] = it.type.name
-        }
         spinner_transaction_wallet.adapter = ArrayAdapter<String>(context!!,
-                android.R.layout.simple_list_item_1, type)
+                android.R.layout.simple_list_item_1,  context!!.resources.getStringArray(R.array.wallets))
     }
 
     private fun buildTransaction() {
@@ -79,10 +72,13 @@ class TransactionAddFragment : DialogFragment() {
                 else -> Currency.RUBLE
             }
 
+            val walletType = WalletListModel
+            mWallet = walletType.getWallets()
+
             val chooseWallet = when(spinner_transaction_wallet.selectedItem) {
-                WalletType.BANK_ACCOUNT.name -> mWallet.filter{it.type == WalletType.BANK_ACCOUNT}
-                WalletType.CASH.name -> mWallet.filter{it.type == WalletType.CASH}
-                    WalletType.CREDIT_CARD.name -> mWallet.filter{it.type == WalletType.CREDIT_CARD}
+                getStringRes(R.string.bank_account) -> mWallet.filter{it.type == WalletType.BANK_ACCOUNT}
+                getStringRes(R.string.cash) -> mWallet.filter{it.type == WalletType.CASH}
+                getStringRes(R.string.credit_card) -> mWallet.filter{it.type == WalletType.CREDIT_CARD}
                 else -> mWallet.filter{it.type == WalletType.CASH}
             }
 
@@ -92,11 +88,8 @@ class TransactionAddFragment : DialogFragment() {
                 else -> OperationType.SPEND
             }
 
-            var amount = et_transaction_sum.text.toString().toDouble()
+            val amount = et_transaction_sum.text.toString().toDouble()
 
-            if (operationType == OperationType.SPEND) {
-                amount *= -1
-            }
             val transaction = Transaction(0, Calendar.getInstance().time, operationType, transactionCategory, currency, amount, chooseWallet[0])
             callback.onTransactionCreated(transaction)
         } catch (e: IllegalArgumentException) {

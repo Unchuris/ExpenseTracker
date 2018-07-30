@@ -13,6 +13,7 @@ import unchuris.vladislav.expensetracker.ui.fragments.SettingsFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import unchuris.vladislav.expensetracker.ui.fragments.AboutFragment
 import unchuris.vladislav.expensetracker.ui.fragments.WalletFragment
 import unchuris.vladislav.expensetracker.ui.fragments.BalanceFragment
 
@@ -54,10 +55,14 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
                 initToolbar(R.string.toolbar_title_settings, resources.getDimension(R.dimen.default_elevation))
                 supportFragmentManager.beginTransaction().replace(R.id.container_main, SettingsFragment.newInstance()).addToBackStack(null).commit()
             }
-            R.id.nav_log_out -> {
+            R.id.nav_transaction -> {
                 initToolbar(R.string.toolbar_title_transactions, resources.getDimension(R.dimen.default_elevation))
                 supportFragmentManager.beginTransaction().replace(R.id.container_main, BalanceFragment.newInstance()).commit()
                 drawer_layout.closeDrawer(Gravity.START)
+            }
+            R.id.nav_about -> {
+                initToolbar(R.string.toolbar_title_transactions, resources.getDimension(R.dimen.default_elevation))
+                supportFragmentManager.beginTransaction().replace(R.id.container_main, AboutFragment.newInstance()).addToBackStack(null).commit()
             }
         }
         return true

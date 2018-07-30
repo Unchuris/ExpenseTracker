@@ -48,8 +48,6 @@ class WalletFragment : DaggerFragment() {
 
         binding.walletModel = walletListModel
 
-//        mFragmentCardAdapter = CardFragmentPagerAdapter(childFragmentManager, dpToPixels(2, context))
-//        viewPager.offscreenPageLimit = 5
         swipelayout.setOnRefreshListener { swipelayout.postDelayed({
             swipelayout.isRefreshing = false
         }, 3000) }
@@ -66,23 +64,6 @@ class WalletFragment : DaggerFragment() {
 
     private fun dpToPixels(dp: Int, context: Context?): Float {
         return dp * context!!.resources.displayMetrics.density
-    }
-
-    override fun onStart() {
-        super.onStart()
-        subscribeToViewModel()
-    }
-
-    private fun subscribeToViewModel() {
-        rateModel.rateMap.observe(this, Observer { response ->
-            walletListModel.setRate(response!!)
-            chartListModel.setRate(response)
-        })
-    }
-
-    override fun onStop() {
-        super.onStop()
-        removeObservers()
     }
 
     private fun removeObservers() {

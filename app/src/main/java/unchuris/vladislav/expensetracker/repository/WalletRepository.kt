@@ -9,9 +9,9 @@ import java.util.*
 class WalletRepository {
 
     fun getWallets(): Observable<List<Wallet>> {
-        val currentBalance = 1000.21345678976
-        val currentBalance2 = 1210.21345678976
-        val currentBalance3 = 121.213458976
+        val currentBalance = 5285.99
+        val currentBalance2 = 221.75
+        val currentBalance3 = 203.10
 
         val walletsHardcode = ArrayList<Wallet>()
         val item = Wallet(0, UUID.randomUUID(), WalletType.BANK_ACCOUNT, Money(currentBalance, Currency.RUBLE))

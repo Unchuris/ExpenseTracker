@@ -56,7 +56,8 @@ class WalletListModel : BaseViewModel() {
         val transaction = PostListViewModel.getListTransaction()
         var sum = 0.0
         postList.forEach {
-            transaction.filter { el -> el.wallet.type == it.type
+            transaction.filter { el ->
+                el.wallet.type == it.type
             }.forEach{t ->
                 sum += if (t.currency == it.money.currency) {
                     t.amount
@@ -65,6 +66,7 @@ class WalletListModel : BaseViewModel() {
                 }
             }
             it.money.value = sum
+            sum = 0.0
             updateWallet.add(it.id, it)
         }
         postWalletAdapter.updateCardItem(updateWallet)
