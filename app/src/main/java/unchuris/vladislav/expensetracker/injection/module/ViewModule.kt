@@ -25,5 +25,4 @@ abstract class ViewModule {
 
     @ContributesAndroidInjector
     abstract fun aboutFragment(): AboutFragment
-
 }

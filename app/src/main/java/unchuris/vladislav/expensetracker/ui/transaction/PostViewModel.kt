@@ -24,18 +24,18 @@ class PostViewModel : BaseViewModel() {
     fun bind(post: Transaction) {
         date.value = dateFormat.format(post.date)
         amount.value = String.format("%.2f", post.amount)
-        operationType.value = when(post.operationType) {
+        operationType.value = when (post.operationType) {
             OperationType.INCOME -> {
-                income.value = true
+                income.value = false
                 R.drawable.ic_arrow_upward_green_24dp
             }
             OperationType.SPEND -> {
-                income.value = false
+                income.value = true
                 R.drawable.ic_arrow_downward_red_24dp
             }
         }
         currency.value = string(post.currency.shortName)
-        imgCategory.value = when(post.transactionType) {
+        imgCategory.value = when (post.transactionType) {
             TransactionType.HOUSE -> R.drawable.ic_home_black_24dp
             TransactionType.RELAXATION -> R.drawable.ic_relax
             TransactionType.SERVICE -> R.drawable.ic_service

@@ -1,11 +1,8 @@
 package unchuris.vladislav.expensetracker.ui.chart
 
 import android.arch.lifecycle.MutableLiveData
-import android.graphics.Color
 import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +13,7 @@ import unchuris.vladislav.expensetracker.model.Transaction
 import unchuris.vladislav.expensetracker.model.TransactionType
 import unchuris.vladislav.expensetracker.repository.TransactionRepository
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
-import unchuris.vladislav.expensetracker.ui.wallet.RateModel
+import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.OperationUtils
 
 class ChartListModel : BaseViewModel() {
@@ -43,13 +40,10 @@ class ChartListModel : BaseViewModel() {
         }
     }
 
-
     private fun onRetrievePostListStart() {
-
     }
 
     private fun onRetrievePostListFinish() {
-
     }
 
     private fun onRetrievePostListSuccess(postList: List<Transaction>) {
@@ -57,19 +51,19 @@ class ChartListModel : BaseViewModel() {
     }
 
     private fun getPieData(postList: List<Transaction>): PieData {
-        val ou = OperationUtils(RateModel.getRate())
+        val ou = OperationUtils(WalletListModel.getRate())
         var sum = 0f
         val yEntrys = ArrayList<PieEntry>()
         enumValues<TransactionType>().forEach { category ->
             postList.filter { el ->
                 (el.transactionType == category) and
-                        (el.operationType == OperationType.SPEND)}.forEach { t ->
+                        (el.operationType == OperationType.SPEND) }.forEach { t ->
                 sum += if (t.currency != Currency.DOLLAR) {
                     ou.convert(t.amount, t.currency, Currency.DOLLAR).toFloat()
                 } else t.amount.toFloat()
             }
 
-            if(sum > 0) {
+            if (sum > 0) {
                 yEntrys.add(PieEntry(sum, category.name))
             }
 
@@ -79,9 +73,7 @@ class ChartListModel : BaseViewModel() {
         return getChart(yEntrys)
     }
 
-
     private fun onRetrievePostListError() {
-
     }
 
     override fun onCleared() {
@@ -90,5 +82,4 @@ class ChartListModel : BaseViewModel() {
             subscription.dispose()
         }
     }
-
 }

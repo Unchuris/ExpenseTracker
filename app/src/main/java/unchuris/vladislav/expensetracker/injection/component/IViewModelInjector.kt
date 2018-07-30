@@ -4,7 +4,6 @@ import dagger.Component
 import unchuris.vladislav.expensetracker.injection.module.NetworkModule
 import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
-import unchuris.vladislav.expensetracker.ui.wallet.RateModel
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import javax.inject.Singleton
 
@@ -15,7 +14,6 @@ interface IViewModelInjector {
     fun inject(postListViewModel: PostListViewModel)
     fun inject(moneyListModel: WalletListModel)
     fun inject(moneyListModel: ChartListModel)
-    fun inject(moneyListModel: RateModel)
 
     @Component.Builder
     interface Builder {

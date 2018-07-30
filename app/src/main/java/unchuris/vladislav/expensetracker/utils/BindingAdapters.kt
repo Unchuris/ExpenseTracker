@@ -9,7 +9,6 @@ import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.github.mikephil.charting.animation.Easing
@@ -18,10 +17,8 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListAdapter
 import unchuris.vladislav.expensetracker.utils.extension.getParentActivity
-import android.databinding.adapters.TextViewBindingAdapter.setText
 import com.github.mikephil.charting.components.Description
 import unchuris.vladislav.expensetracker.R
-
 
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {

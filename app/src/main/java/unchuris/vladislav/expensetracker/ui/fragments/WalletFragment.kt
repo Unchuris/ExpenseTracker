@@ -14,22 +14,19 @@ import unchuris.vladislav.expensetracker.databinding.FragmentWalletBinding
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
-import unchuris.vladislav.expensetracker.ui.wallet.RateModel
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import javax.inject.Inject
+import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
 
 class WalletFragment : DaggerFragment() {
 
     companion object {
-        fun newInstance() : WalletFragment {
+        fun newInstance(): WalletFragment {
             return WalletFragment()
         }
     }
 
     private lateinit var walletListModel: WalletListModel
     private lateinit var chartListModel: ChartListModel
-    private lateinit var rateModel: RateModel
+    private lateinit var postListViewModel: PostListViewModel
     private var binding: FragmentWalletBinding by autoCleared()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -44,29 +41,19 @@ class WalletFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        postListViewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
         walletListModel = ViewModelProviders.of(this).get(WalletListModel::class.java)
 
         binding.walletModel = walletListModel
 
-        swipelayout.setOnRefreshListener { swipelayout.postDelayed({
-            swipelayout.isRefreshing = false
-        }, 3000) }
-
-        rateModel = ViewModelProviders.of(this).get(RateModel::class.java)
-
         chartListModel = ViewModelProviders.of(this).get(ChartListModel::class.java)
 
         binding.chartModel = chartListModel
-
 
         binding.setLifecycleOwner(this)
     }
 
     private fun dpToPixels(dp: Int, context: Context?): Float {
         return dp * context!!.resources.displayMetrics.density
-    }
-
-    private fun removeObservers() {
-        rateModel.rateMap.removeObservers(this)
     }
 }

@@ -44,6 +44,7 @@
     <string name="chartDescription">Все расходы по кошелькам</string>
     <string name="transaction">Транзакции</string>
     <string name="late">Пока это все</string>
+    <string name="rate">Курс:</string>
 
     <string-array name="currencies">
         <item>@string/rub</item>

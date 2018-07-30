@@ -3,7 +3,6 @@ package unchuris.vladislav.expensetracker.base
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import unchuris.vladislav.expensetracker.injection.DaggerIAppComponent
-import com.squareup.leakcanary.LeakCanary
 
 class BaseApplication : DaggerApplication() {
 

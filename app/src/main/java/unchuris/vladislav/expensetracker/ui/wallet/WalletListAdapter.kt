@@ -34,7 +34,7 @@ class WalletListAdapter : PagerAdapter(), ICardAdapter {
     fun updateCardItem(item: List<Wallet>) {
         mData.clear()
         mViews.clear()
-        item.forEach{
+        item.forEach {
             addCardItem(it)
         }
     }

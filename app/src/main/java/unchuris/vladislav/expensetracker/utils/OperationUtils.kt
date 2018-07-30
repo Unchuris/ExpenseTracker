@@ -3,7 +3,6 @@ package unchuris.vladislav.expensetracker.utils
 import unchuris.vladislav.expensetracker.model.Currency
 import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.model.Transaction
-import unchuris.vladislav.expensetracker.ui.wallet.RateModel
 
 class OperationUtils(private val rateMap: HashMap<String, Double>) {
 
@@ -11,8 +10,9 @@ class OperationUtils(private val rateMap: HashMap<String, Double>) {
         var amount = 0.0
         var sum = 0.0
         for (transaction in transactions) {
-            amount += if (currency == transaction.currency) transaction.amount else convert(transaction.amount, currency, transaction.currency)
-            if (transaction.transactionType === OperationType.INCOME) sum += amount else sum -= amount
+            amount += if (currency == transaction.currency) transaction.amount else convert(transaction.amount, transaction.currency, currency)
+            if (transaction.operationType === OperationType.INCOME) sum += amount else sum -= amount
+            amount = 0.0
         }
         return sum
     }

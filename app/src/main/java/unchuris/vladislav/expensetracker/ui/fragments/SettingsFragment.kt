@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import unchuris.vladislav.expensetracker.R
 
-class SettingsFragment: DaggerFragment() {
+class SettingsFragment : DaggerFragment() {
 
     companion object {
-        fun newInstance() : SettingsFragment {
+        fun newInstance(): SettingsFragment {
             return SettingsFragment()
         }
     }

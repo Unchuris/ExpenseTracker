@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.NavigationView
 import android.support.v4.app.FragmentManager
-import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
@@ -33,13 +32,13 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         toggle.syncState()
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             initToolbar(R.string.toolbar_title_finance, 4f)
             supportFragmentManager.beginTransaction().add(R.id.container_main, WalletFragment.newInstance()).commit()
         }
     }
 
-    private fun initToolbar(@StringRes title : Int, elevation : Float) {
+    private fun initToolbar(@StringRes title: Int, elevation: Float) {
         toolbar_main.setTitle(title)
         toolbar_main.elevation = elevation
     }
@@ -76,7 +75,7 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
     override fun onBackStackChanged() {
-        if(supportFragmentManager.backStackEntryCount > 0) {
+        if (supportFragmentManager.backStackEntryCount > 0) {
             toggle.isDrawerIndicatorEnabled = false
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             toolbar_main.setNavigationOnClickListener { onBackPressed() }
@@ -95,11 +94,10 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         if (drawer_layout != null && drawer_layout.isDrawerOpen(Gravity.START)) {
             drawer_layout.closeDrawer(Gravity.START, true)
         }
-        if(supportFragmentManager.backStackEntryCount > 0) {
+        if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
         } else {
             super.onBackPressed()
         }
     }
-
 }

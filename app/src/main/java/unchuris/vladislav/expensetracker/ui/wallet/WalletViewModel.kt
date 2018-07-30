@@ -15,14 +15,14 @@ class WalletViewModel : BaseViewModel() {
     private val icon = MutableLiveData<Int>()
 
     fun bind(post: Wallet) {
-        typeWallet.value = string(when(post.type) {
+        typeWallet.value = string(when (post.type) {
             WalletType.CREDIT_CARD -> R.string.credit_card
             WalletType.CASH -> R.string.cash
             WalletType.BANK_ACCOUNT -> R.string.bank_account
         })
         typeCurrency.value = string(post.money.currency.shortName)
         amount.value = String.format("%.2f", post.money.value) + " " + string(post.money.currency.shortName)
-        icon.value = when(post.type) {
+        icon.value = when (post.type) {
             WalletType.BANK_ACCOUNT -> R.drawable.ic_account_balance_wallet_24dp
             WalletType.CASH -> R.drawable.ic_picture_in_cash_24dp
             WalletType.CREDIT_CARD -> R.drawable.ic_credit_card_24dp

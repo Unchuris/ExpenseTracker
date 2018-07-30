@@ -6,7 +6,6 @@ import unchuris.vladislav.expensetracker.injection.component.IViewModelInjector
 import unchuris.vladislav.expensetracker.injection.module.NetworkModule
 import unchuris.vladislav.expensetracker.ui.chart.ChartListModel
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
-import unchuris.vladislav.expensetracker.ui.wallet.RateModel
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 
 abstract class BaseViewModel : ViewModel() {
@@ -24,7 +23,6 @@ abstract class BaseViewModel : ViewModel() {
             is PostListViewModel -> injector.inject(this)
             is WalletListModel -> injector.inject(this)
             is ChartListModel -> injector.inject(this)
-            is RateModel -> injector.inject(this)
         }
     }
 }

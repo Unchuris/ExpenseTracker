@@ -23,6 +23,7 @@
     <string name="validate_toast">Incorrect input data</string>
     <string name="spend">Spend</string>
     <string name="income">Income</string>
+    <string name="rate">Rate:</string>
 
     <string name="food">Food</string>
     <string name="clothes">Clothes</string>

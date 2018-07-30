@@ -13,11 +13,11 @@ fun getChart(yEntrys: ArrayList<PieEntry>): PieData {
 
     val colors = ArrayList<Int>()
     colors.add(Color.BLUE)
-    colors.add(Color.RED)
+    colors.add(Color.MAGENTA)
     colors.add(Color.GREEN)
     colors.add(Color.CYAN)
     colors.add(Color.YELLOW)
-    colors.add(Color.MAGENTA)
+    colors.add(Color.RED)
     colors.add(Color.GRAY)
 
     pieDataSet.colors = colors

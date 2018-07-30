@@ -19,17 +19,17 @@ class TransactionRepository {
         }
 
         val item = Transaction(0, Date(), OperationType.SPEND, TransactionType.FOOD, Currency.DOLLAR, 10.00, walletsList[0])
-        val item2 = Transaction(1, Date(), OperationType.SPEND, TransactionType.FOOD, Currency.DOLLAR, 100.00, walletsList[1])
-        val item3 = Transaction(2, Date(), OperationType.SPEND, TransactionType.CLOTHES, Currency.DOLLAR, 130.00, walletsList[2])
-        val item4 = Transaction(3, Date(), OperationType.INCOME, TransactionType.HOUSE, Currency.RUBLE, 10.00, walletsList[0])
+        val item2 = Transaction(1, Date(), OperationType.INCOME, TransactionType.FOOD, Currency.DOLLAR, 200.00, walletsList[1])
+        val item3 = Transaction(2, Date(), OperationType.SPEND, TransactionType.CLOTHES, Currency.DOLLAR, 70.00, walletsList[2])
+        val item4 = Transaction(3, Date(), OperationType.INCOME, TransactionType.HOUSE, Currency.RUBLE, 100.00, walletsList[0])
         val item5 = Transaction(4, Date(), OperationType.SPEND, TransactionType.OTHER, Currency.RUBLE, 120.00, walletsList[0])
-        val item7 = Transaction(5, Date(), OperationType.SPEND, TransactionType.RELAXATION, Currency.RUBLE, 102.00, walletsList[1])
-        val item8 = Transaction(5, Date(), OperationType.SPEND, TransactionType.OTHER, Currency.DOLLAR, 73.10, walletsList[2])
+        val item7 = Transaction(5, Date(), OperationType.INCOME, TransactionType.RELAXATION, Currency.RUBLE, 102.00, walletsList[1])
+        val item8 = Transaction(5, Date(), OperationType.INCOME, TransactionType.OTHER, Currency.DOLLAR, 723.10, walletsList[2])
         val item9 = Transaction(5, Date(), OperationType.INCOME, TransactionType.SERVICE, Currency.DOLLAR, 100.20, walletsList[1])
         val item10 = Transaction(5, Date(), OperationType.INCOME, TransactionType.SERVICE, Currency.RUBLE, 120.50, walletsList[1])
         val item11 = Transaction(5, Date(), OperationType.SPEND, TransactionType.RELAXATION, Currency.DOLLAR, 18.00, walletsList[1])
-        val item12 = Transaction(5, Date(), OperationType.SPEND, TransactionType.SPORT, Currency.DOLLAR, 72.00, walletsList[0])
-        val item13 = Transaction(5, Date(), OperationType.SPEND, TransactionType.SPORT, Currency.RUBLE, 12.00, walletsList[0])
+        val item12 = Transaction(5, Date(), OperationType.INCOME, TransactionType.SPORT, Currency.DOLLAR, 72.00, walletsList[0])
+        val item13 = Transaction(5, Date(), OperationType.INCOME, TransactionType.SPORT, Currency.RUBLE, 12.00, walletsList[0])
 
         transactionsHardcode.add(item)
         transactionsHardcode.add(item2)
@@ -46,5 +46,4 @@ class TransactionRepository {
 
         return Observable.just(transactionsHardcode)
     }
-
 }

@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import unchuris.vladislav.expensetracker.R
 
-class AboutFragment: DaggerFragment() {
+class AboutFragment : DaggerFragment() {
 
     companion object {
-        fun newInstance() : AboutFragment {
+        fun newInstance(): AboutFragment {
             return AboutFragment()
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
-            = inflater.inflate(R.layout.fragmet_about, container, false)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+            inflater.inflate(R.layout.fragmet_about, container, false)
 }

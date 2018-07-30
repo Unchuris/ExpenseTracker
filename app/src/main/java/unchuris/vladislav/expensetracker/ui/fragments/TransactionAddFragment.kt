@@ -28,9 +28,12 @@ class TransactionAddFragment : DialogFragment() {
         callback = parentFragment as AddTransactionCallback
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View?
-            = inflater.inflate(R.layout.fragment_transaction_add, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+            inflater.inflate(R.layout.fragment_transaction_add, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,23 +53,23 @@ class TransactionAddFragment : DialogFragment() {
         spinner_operation_type.adapter = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.operation_type))
         spinner_transaction_wallet.adapter = ArrayAdapter<String>(context!!,
-                android.R.layout.simple_list_item_1,  context!!.resources.getStringArray(R.array.wallets))
+                android.R.layout.simple_list_item_1, context!!.resources.getStringArray(R.array.wallets))
     }
 
     private fun buildTransaction() {
         try {
-            val transactionCategory = when(spinner_transaction_category.selectedItem) {
-                getStringRes(R.string.food)-> TransactionType.FOOD
-                getStringRes(R.string.clothes)-> TransactionType.CLOTHES
-                getStringRes(R.string.service)-> TransactionType.CLOTHES
-                getStringRes(R.string.sport)-> TransactionType.SPORT
-                getStringRes(R.string.house)-> TransactionType.HOUSE
-                getStringRes(R.string.relaxation)-> TransactionType.RELAXATION
-                getStringRes(R.string.other)-> TransactionType.OTHER
+            val transactionCategory = when (spinner_transaction_category.selectedItem) {
+                getStringRes(R.string.food) -> TransactionType.FOOD
+                getStringRes(R.string.clothes) -> TransactionType.CLOTHES
+                getStringRes(R.string.service) -> TransactionType.CLOTHES
+                getStringRes(R.string.sport) -> TransactionType.SPORT
+                getStringRes(R.string.house) -> TransactionType.HOUSE
+                getStringRes(R.string.relaxation) -> TransactionType.RELAXATION
+                getStringRes(R.string.other) -> TransactionType.OTHER
                 else -> TransactionType.OTHER
             }
 
-            val currency = when(spinner_transaction_currency.selectedItem) {
+            val currency = when (spinner_transaction_currency.selectedItem) {
                 getStringRes(R.string.rub) -> Currency.RUBLE
                 getStringRes(R.string.usd) -> Currency.DOLLAR
                 else -> Currency.RUBLE
@@ -75,14 +78,14 @@ class TransactionAddFragment : DialogFragment() {
             val walletType = WalletListModel
             mWallet = walletType.getWallets()
 
-            val chooseWallet = when(spinner_transaction_wallet.selectedItem) {
-                getStringRes(R.string.bank_account) -> mWallet.filter{it.type == WalletType.BANK_ACCOUNT}
-                getStringRes(R.string.cash) -> mWallet.filter{it.type == WalletType.CASH}
-                getStringRes(R.string.credit_card) -> mWallet.filter{it.type == WalletType.CREDIT_CARD}
-                else -> mWallet.filter{it.type == WalletType.CASH}
+            val chooseWallet = when (spinner_transaction_wallet.selectedItem) {
+                getStringRes(R.string.bank_account) -> mWallet.filter { it.type == WalletType.BANK_ACCOUNT }
+                getStringRes(R.string.cash) -> mWallet.filter { it.type == WalletType.CASH }
+                getStringRes(R.string.credit_card) -> mWallet.filter { it.type == WalletType.CREDIT_CARD }
+                else -> mWallet.filter { it.type == WalletType.CASH }
             }
 
-            val operationType = when(spinner_operation_type.selectedItem) {
+            val operationType = when (spinner_operation_type.selectedItem) {
                 getStringRes(R.string.spend) -> OperationType.SPEND
                 getStringRes(R.string.income) -> OperationType.INCOME
                 else -> OperationType.SPEND
@@ -97,7 +100,6 @@ class TransactionAddFragment : DialogFragment() {
         }
         dialog.dismiss()
     }
-
 
     private fun getStringRes(resId: Int): String = context!!.resources.getString(resId)
 }

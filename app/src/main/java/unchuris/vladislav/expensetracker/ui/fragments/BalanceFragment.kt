@@ -14,13 +14,12 @@ import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.FragmentBalanceBinding
 import unchuris.vladislav.expensetracker.model.Transaction
 import unchuris.vladislav.expensetracker.ui.transaction.PostListViewModel
-import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import unchuris.vladislav.expensetracker.utils.autoCleared
 
-class BalanceFragment: DaggerFragment(), TransactionAddFragment.AddTransactionCallback {
+class BalanceFragment : DaggerFragment(), TransactionAddFragment.AddTransactionCallback {
 
     companion object {
-        fun newInstance() : BalanceFragment {
+        fun newInstance(): BalanceFragment {
             return BalanceFragment()
         }
     }
@@ -62,5 +61,4 @@ class BalanceFragment: DaggerFragment(), TransactionAddFragment.AddTransactionCa
         transactionAddFragment = TransactionAddFragment()
         transactionAddFragment.show(childFragmentManager, TAG)
     }
-
 }

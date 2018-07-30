@@ -23,7 +23,7 @@ class PostListViewModel : BaseViewModel() {
     val postListAdapter: PostListAdapter = PostListAdapter()
 
     companion object {
-        private var listCurrentTransaction : MutableList<Transaction> = ArrayList()
+        private var listCurrentTransaction: MutableList<Transaction> = ArrayList()
 
         fun getListTransaction(): MutableList<Transaction> = listCurrentTransaction
     }
@@ -72,5 +72,4 @@ class PostListViewModel : BaseViewModel() {
     fun addNewTransaction(t: Transaction) {
         postListAdapter.addTransaction(t)
     }
-
 }

@@ -1,6 +1,6 @@
 package unchuris.vladislav.expensetracker.model
 
 enum class TransactionType {
-    FOOD, CLOTHES,SERVICE, SPORT,
+    FOOD, CLOTHES, SERVICE, SPORT,
     HOUSE, RELAXATION, OTHER
 }
