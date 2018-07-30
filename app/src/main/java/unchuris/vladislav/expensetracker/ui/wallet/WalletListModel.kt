@@ -26,7 +26,7 @@ class WalletListModel : BaseViewModel() {
 
     var postWalletAdapter = WalletListAdapter()
 
-    var rateMap: MutableLiveData<HashMap<String, Double>> = MutableLiveData()
+    private var rateMap: MutableLiveData<HashMap<String, Double>> = MutableLiveData()
 
     var rate: MutableLiveData<String> = MutableLiveData()
 
@@ -45,13 +45,13 @@ class WalletListModel : BaseViewModel() {
     init {
         rateMap.value = HashMap()
         if (wallets.isEmpty()) {
-            val mockWallet: WalletRepository = WalletRepository()
+            val mockWallet = WalletRepository()
             subscription = mockWallet.getWallets()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { result -> onRetrievePostListSuccess(result) }
-                    ) { e -> onRetrievePostListError(e) }
+                    ) { onRetrievePostListError() }
         } else {
             update(getWallets())
         }
@@ -86,7 +86,7 @@ class WalletListModel : BaseViewModel() {
         }
     }
 
-    fun update(postList: List<Wallet>) {
+    private fun update(postList: List<Wallet>) {
         val updateWallet: MutableList<Wallet> = ArrayList()
         val ou = OperationUtils(getRate())
         val transaction = PostListViewModel.getListTransaction()
@@ -110,7 +110,7 @@ class WalletListModel : BaseViewModel() {
         wallets = updateWallet
     }
 
-    private fun onRetrievePostListError(e: Throwable) {
+    private fun onRetrievePostListError() {
     }
 
     override fun onCleared() {

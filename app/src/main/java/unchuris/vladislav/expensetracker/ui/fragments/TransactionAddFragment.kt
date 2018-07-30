@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_transaction_add.*
-import java.util.*
 import unchuris.vladislav.expensetracker.R
-import unchuris.vladislav.expensetracker.model.*
 import unchuris.vladislav.expensetracker.model.Currency
+import unchuris.vladislav.expensetracker.model.Transaction
+import unchuris.vladislav.expensetracker.model.Wallet
+import unchuris.vladislav.expensetracker.model.WalletType
+import unchuris.vladislav.expensetracker.model.TransactionType
+import unchuris.vladislav.expensetracker.model.OperationType
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
 import java.lang.IllegalArgumentException
+import java.util.Calendar
 
 class TransactionAddFragment : DialogFragment() {
 

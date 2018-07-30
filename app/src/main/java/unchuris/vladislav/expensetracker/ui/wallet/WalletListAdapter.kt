@@ -16,12 +16,11 @@ class WalletListAdapter : PagerAdapter(), ICardAdapter {
 
     private val mViews: MutableList<CardView?>
 
-    private var mData: MutableList<Wallet>
+    private var mData: MutableList<Wallet> = ArrayList()
 
     private var mBaseElevation: Float = 0.toFloat()
 
     init {
-        mData = ArrayList()
         mViews = ArrayList()
     }
 

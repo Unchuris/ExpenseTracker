@@ -1,14 +1,12 @@
 package unchuris.vladislav.expensetracker.ui.fragments
 
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_wallet.*
 import unchuris.vladislav.expensetracker.R
 import unchuris.vladislav.expensetracker.databinding.FragmentWalletBinding
 import unchuris.vladislav.expensetracker.ui.wallet.WalletListModel
@@ -40,20 +38,11 @@ class WalletFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         postListViewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
         walletListModel = ViewModelProviders.of(this).get(WalletListModel::class.java)
-
         binding.walletModel = walletListModel
-
         chartListModel = ViewModelProviders.of(this).get(ChartListModel::class.java)
-
         binding.chartModel = chartListModel
-
         binding.setLifecycleOwner(this)
-    }
-
-    private fun dpToPixels(dp: Int, context: Context?): Float {
-        return dp * context!!.resources.displayMetrics.density
     }
 }

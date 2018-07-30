@@ -14,16 +14,17 @@
         android:id="@+id/menu_prefs">
         <item
             android:id="@+id/nav_transaction"
-            android:checkable="false"
+            android:checkable="true"
             android:icon="@drawable/ic_terrain_black_24dp"
             android:title="@string/transaction"/>
         <item
             android:id="@+id/nav_settings"
+            android:checkable="true"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/settings" />
         <item
             android:id="@+id/nav_about"
-            android:checkable="false"
+            android:checkable="true"
             android:icon="@drawable/ic_info_black_24dp"
             android:title="@string/about_application">
         </item>

@@ -4,7 +4,7 @@ import unchuris.vladislav.expensetracker.model.Currency
 import unchuris.vladislav.expensetracker.model.Money
 import unchuris.vladislav.expensetracker.model.Wallet
 import unchuris.vladislav.expensetracker.model.WalletType
-import java.util.*
+import java.util.UUID
 
 class WalletRepository {
 

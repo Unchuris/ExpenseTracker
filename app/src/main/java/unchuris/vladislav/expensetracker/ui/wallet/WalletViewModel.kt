@@ -30,19 +30,11 @@ class WalletViewModel : BaseViewModel() {
         }
     }
 
-    fun getTypeWallet(): MutableLiveData<String> {
-        return typeWallet
-    }
+    fun getTypeWallet(): MutableLiveData<String> = typeWallet
 
-    fun getTypeCurrency(): MutableLiveData<String> {
-        return typeCurrency
-    }
+    fun getTypeCurrency(): MutableLiveData<String> = typeCurrency
 
-    fun getAmount(): MutableLiveData<String> {
-        return amount
-    }
+    fun getAmount(): MutableLiveData<String> = amount
 
-    fun getIcon(): MutableLiveData<Int> {
-        return icon
-    }
+    fun getIcon(): MutableLiveData<Int> = icon
 }

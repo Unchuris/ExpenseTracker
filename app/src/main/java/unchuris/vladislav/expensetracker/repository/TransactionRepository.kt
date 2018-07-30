@@ -1,9 +1,12 @@
 package unchuris.vladislav.expensetracker.repository
 
 import io.reactivex.Observable
-import unchuris.vladislav.expensetracker.model.*
+import unchuris.vladislav.expensetracker.model.TransactionType
 import unchuris.vladislav.expensetracker.model.Currency
-import java.util.*
+import unchuris.vladislav.expensetracker.model.OperationType
+import unchuris.vladislav.expensetracker.model.Transaction
+import unchuris.vladislav.expensetracker.model.Wallet
+import java.util.Date
 
 class TransactionRepository {
 
