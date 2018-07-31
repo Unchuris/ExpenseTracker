@@ -22,6 +22,6 @@ class BaseApplication : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         baseApplication = applicationContext as BaseApplication
-        //LeakCanary.install(this)
     }
+
 }

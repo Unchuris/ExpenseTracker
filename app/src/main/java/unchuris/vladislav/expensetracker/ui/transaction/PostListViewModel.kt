@@ -32,7 +32,6 @@ class PostListViewModel : BaseViewModel() {
         if (listCurrentTransaction.isEmpty()) {
             val mockTransaction = TransactionRepository()
             subscription = mockTransaction.getAllTransactions()
-                    //subscription = postApi.getTransactions()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { onRetrievePostListStart() }
